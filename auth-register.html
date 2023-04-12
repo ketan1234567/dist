@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,10 +11,30 @@
     <link rel="stylesheet" href="assets/css/pages/auth.css">
 
     <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<script src="exponential.js"></script>
- 
+    <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="exponential.js"></script>
+    <link rel="stylesheet" href="./assets/vendors/sweetalert2/sweetalert2.min.css">
+    <link rel="stylesheet" href="./assets/css/app.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/bootstrap.css">
+
+    <link rel="stylesheet" href="./assets/vendors/sweetalert2/sweetalert2.min.css">
+
+    <link rel="stylesheet" href="./assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="./assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="./assets/css/app.css">
+    <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon">
+    
+    <style>
+        .error {
+            color: red !important;
+            font-size: 25px;
+
+        }
+    </style>
+
 </head>
 
 <body>
@@ -30,57 +49,53 @@
                     <h1 class="auth-title">Sign Up</h1>
                     <p class="auth-subtitle mb-5">Input your data to register to our website.</p>
 
-                    <form action="">
+                    <form action="" id="login-form">
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="email" class="form-control form-control-xl" placeholder="Email" name="email">
+
+                            <input type="email" class="form-control form-control-xl" placeholder="Email" name="email"
+                                required>
+
+
                             <div class="form-control-icon">
                                 <i class="bi bi-envelope"></i>
                             </div>
                         </div>
+                        <div>
+
+                        </div>
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="text" class="form-control form-control-xl" placeholder="username">
+                            <input type="text" class="form-control form-control-xl" id="myinput" placeholder="username"
+                                name="username" required maxlength="6">
                             <div class="form-control-icon">
                                 <i class="bi bi-person"></i>
                             </div>
                         </div>
+                        <div>
+
+                        </div>
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="text" class="form-control form-control-xl" placeholder="password">
+                            <input type="text" class="form-control form-control-xl" placeholder="password"
+                                name="password" required>
                             <div class="form-control-icon">
                                 <i class="bi bi-shield-lock"></i>
                             </div>
                         </div>
+                        <div>
+
+                        </div>
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="password" class="form-control form-control-xl" placeholder="Confirm Password">
+                            <input type="password" class="form-control form-control-xl" placeholder="Confirm Password"
+                                required>
                             <div class="form-control-icon">
                                 <i class="bi bi-shield-lock"></i>
                             </div>
                         </div>
-                        <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5" id="button">Sign Up</button>
+                        <div>
+
+                        </div>
+                        <input class="btn btn-primary btn-block btn-lg shadow-lg mt-5" id="button" type="submit"></button>
                     </form>
-                    <script>
-                       $(document).ready(function(){
-                        var fd = new FormData();
-                var other_data = $('form').serializeArray();
-                $.each(other_data,function(key,input){
-                    fd.append(input.name,name.value);
-                    fd.append(input.name,name.value);
-                    fd.append(input.name,name.value);
-                
-                });
-                console.log(other_data)
-                $.ajax({
-                    url: 'http://localhost:5000/signup',
-                    data: fd,
-                    contentType: false,
-                    processData: false,
-                    type: 'POST',
-                    success: function(data){
-                        console.log(data);
-                    }
-                });
-                        });
-                
-                    </script>
+
                     <div class="text-center mt-5 text-lg fs-4">
                         <p class='text-gray-600'>Already have an account? <a href="auth-login.html"
                                 class="font-bold">Log
@@ -88,18 +103,149 @@
                     </div>
                 </div>
             </div>
+            
             <div class="col-lg-7 d-none d-lg-block">
                 <div id="auth-right">
 
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-12">
+                    <button id="success"
+                        class="btn btn-outline-success btn-lg btn-block">Success</button>
+                </div>
+                <div class="col-md-4 col-12">
+                    <button id="error"
+                        class="btn btn-outline-danger btn-lg btn-block">Error</button>
+                </div>
+                <div class="col-md-4 col-12">
+                    <button id="warning"
+                        class="btn btn-outline-warning btn-lg btn-block">Warning</button>
                 </div>
             </div>
         </div>
 
     </div>
 
-       <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-       <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-       <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"
+        integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            $("form").submit(function (e) {
+                e.preventDefault()
+
+               if(!$("form").valid()){
+
+                swal.fire({
+                title: "Error",
+                text: "enter Your",
+                icon: "error",
+                confirmButtonText: "Ok"
+             });
+
+             return;
+               }
+                var fd = new FormData();
+
+                var other_data = $('form').serializeArray();
+                $.each(other_data, function (key, input) {
+                    fd.append(input.name, input.value);
+                });
+                var object = {};
+                fd.forEach(function (value, key) {
+                    object[key] = value;
+                });
+                console.log(fd);
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://localhost:1010/data/creates',
+                    data: JSON.stringify(object),
+                    contentType: "application/json; charset=utf-8",
+                    processData: false,
+                    success: function (data) {
+                       if(data.send=='ok'){
+                        swal.fire({
+                title: "Success",
+                text: "enter Your",
+                icon: "success",
+                confirmButtonText: "Ok",
+                
+
+              
+             });
+        
+
+                       }else{
+                        swal.fire({
+                title: "Error",
+                text: "enter Your",
+                icon: "error",
+                confirmButtonText: "Ok"
+             });
+
+                       }
+                    }
+                    ,
+                    error: function (data) {
+                        console.log(data);
+                    }
+                });
+            });
+        });
+
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+    <script src="./assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="./assets/js/bootstrap.bundle.min.js"></script>
+
+    <script src="./assets/js/extensions/sweetalert2.js"></script>
+    <script src="./assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
+
+    <script src="./assets/js/main.js"></script>
+    <script>
+        $().ready(function () {
+            // validate the comment form when it is submitted
+            $("#login-form").validate({
+                errorPlacement: function (error, element) {
+                    error.appendTo(element.parent("div").next("div"));
+                },
+
+            })
+
+        })
+
+        document.getElementById('myinput').addEventListener('keypress', event => {
+            if (!`${event.target.value}${event.key}`.match(/^[0-9]{0,6}$/)) {
+                // block the input if result does not match
+                event.preventDefault();
+                event.stopPropagation();
+                return false;
+            }
+        })
+
+        $("#success").click(function(){
+       
+});
+$("#error").click(function(){
+             swal.fire({
+                title: "Error",
+                text: "enter Your",
+                icon: "error",
+                confirmButtonText: "Ok"
+             });
+});
+$("#warning").click(function(){
+             swal.fire({
+                title: "Warning",
+                text: "enter Your",
+                icon: "warning",
+                confirmButtonText: "Ok"
+             });
+});
+
+    </script>
+   
 </body>
 
 </html>
