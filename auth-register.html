@@ -169,13 +169,9 @@
                 text: "enter Your",
                 icon: "success",
                 confirmButtonText: "Ok",
-                
-
               
              });
-        
-
-                       }else{
+                 }else{
                         swal.fire({
                 title: "Error",
                 text: "enter Your",
@@ -215,17 +211,9 @@
 
         })
 
-        document.getElementById('myinput').addEventListener('keypress', event => {
-            if (!`${event.target.value}${event.key}`.match(/^[0-9]{0,6}$/)) {
-                // block the input if result does not match
-                event.preventDefault();
-                event.stopPropagation();
-                return false;
-            }
-        })
-
         $("#success").click(function(){
-       
+
+            
 });
 $("#error").click(function(){
              swal.fire({
