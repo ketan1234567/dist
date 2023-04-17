@@ -1,0 +1,20 @@
+$(document).ready(function () {
+        
+
+    $('#table1').dataTable( function(e){
+        e.preventDefault()
+     "ajax": {
+        "url": "http://localhost:1010/user/userDataCheck",
+
+         "contentType": "application/json; charset=utf-8",
+                // crossDomain:true,
+"processData": false,
+"data": function ( d ) {
+    alert(d);
+  return $.extend( {}, d, {
+    "extra_search": $('#extra').val()
+  } );
+}
+}
+} );
+    });

@@ -172,13 +172,10 @@
                             document.cookie = `token = ${data.data}`
 
                             swal.fire({
-                                title: "Success",
-                                text: "enter Your",
+                                title: "Logged in successfully",
+                                text: data,
                                 icon: "success",
                                 confirmButtonText: "Ok",
-
-
-
                             }).then(function (result) {
                                 if (true) {
                                     window.location = "http://127.0.0.1:5500/index.html";

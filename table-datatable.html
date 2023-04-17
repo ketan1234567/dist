@@ -8,14 +8,14 @@
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" href="./assets/css/bootstrap.css">
 
-    <link rel="stylesheet" href="assets/vendors/simple-datatables/style.css">
+    <link rel="stylesheet" href="./assets/vendors/simple-datatables/style.css">
 
-    <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
-    <link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css">
-    <link rel="stylesheet" href="assets/css/app.css">
-    <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon">
+    <link rel="stylesheet" href="./assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="./assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="./assets/css/app.css">
+    <link rel="shortcut icon" href="./assets/images/favicon.svg" type="image/x-icon">
 </head>
 
 <body>
@@ -163,25 +163,23 @@
                         <div class="card-body">
                             <table class="table table-striped" id="table1">
                                 <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Phone</th>
-                                        <th>City</th>
-                                        <th>Status</th>
+                                   <tr>
+                                        <th>username</th>
+                                        <th>password</th>
+                                        <th>employee_type</th>
+                                        
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                  <!---- <tr>
                                         <td>Graiden</td>
-                                        <td>vehicula.aliquet@semconsequat.co.uk</td>
-                                        <td>076 4820 8838</td>
-                                        <td>Offenburg</td>
+                                        <td> <input type="button" id="display" value="Display All Data" /> </td>
+                                     
                                         <td>
                                             <span class="badge bg-success">Active</span>
                                         </td>
                                     </tr>
-                                    <tr>
+                                      <tr>
                                         <td>Dale</td>
                                         <td>fringilla.euismod.enim@quam.ca</td>
                                         <td>0500 527693</td>
@@ -190,13 +188,13 @@
                                             <span class="badge bg-success">Active</span>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>Nathaniel</td>
+                                    <tr>--->
+                                       <!---- <td>{data.username}</td>
                                         <td>mi.Duis@diam.edu</td>
                                         <td>(012165) 76278</td>
                                         <td>Grumo Appula</td>
-                                        <td>
-                                            <span class="badge bg-danger">Inactive</span>
+                                        <td>-->
+                                     <!----      <span class="badge bg-danger">Inactive</span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -405,9 +403,14 @@
                                         <td>
                                             <span class="badge bg-success">Active</span>
                                         </td>
-                                    </tr>
+                                    </tr>-->
                                 </tbody>
                             </table>
+
+
+                          
+
+                            </div>
                         </div>
                     </div>
 
@@ -427,17 +430,82 @@
             </footer>
         </div>
     </div>
-    <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="./assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="./assets/js/bootstrap.bundle.min.js"></script>
 
-    <script src="assets/vendors/simple-datatables/simple-datatables.js"></script>
+    <script src="./assets/vendors/simple-datatables/simple-datatables.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"
+    integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
+    integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+        
     <script>
-        // Simple Datatable
-        let table1 = document.querySelector('#table1');
-        let dataTable = new simpleDatatables.DataTable(table1);
-    </script>
+    /*  $(document).ready(function() {
+        
 
-    <script src="assets/js/main.js"></script>
+$.ajax({
+url: 'http://localhost:1010/user/userDataCheck',
+method: 'get',
+dataType: 'json',
+success: function (data){
+    
+    if (data) {
+     
+        var data = JSON.stringify(data)
+        console.log(data)
+        
+    }
+
+$('#table1').DataTable( {   
+
+        data: result, 
+             
+        columns: [
+
+              {"result": "username" },
+              {"result": "password" },
+              {"result": "employee_type"},
+                ]
+                
+
+                
+            }); 
+    }
+});
+
+
+});*/
+$(document).ready(function() {
+    $.ajax({
+url: 'http://localhost:1010/user/userDataCheck',
+method: 'get',
+dataType: 'json',
+success : function(data, textStatus, jqXHR) {
+    
+    var table_data = JSON.stringify(data);
+    alert(table_data)
+    var table = $('#table1').DataTable( {
+   
+
+        table_data: data,
+        
+
+        columns: [
+
+{"data": "username" },
+{"data": "password" },
+{"data": "employee_type"},
+  ]
+  
+       
+}); } });
+    });
+    </script>
+   
+
+    <script src="./assets/js/main.js"></script>
 </body>
 
 </html>
