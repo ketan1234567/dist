@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Layout - Mazer Admin Dashboard</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+
+    <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/app.css">
+    <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon">
+</head>
+
+<body>
+    <div id="app">
+        <div id="sidebar" class="active">
+            <div class="sidebar-wrapper active">
+                <div class="sidebar-header">
+                    <div class="d-flex justify-content-between">
+                        <div class="logo">
+                            <a href="index.html"><img src="assets/images/logo/logo.png" alt="Logo" srcset=""></a>
+                        </div>
+                        <div class="toggler">
+                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-menu">
+                    <ul class="menu">
+                        <li class="sidebar-title">Menu</li>
+
+                        <li class="sidebar-item  ">
+                            <a href="index.html" class='sidebar-link'>
+                                <i class="bi bi-grid-fill"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item active ">
+                            <a href="form-layout.html" class='sidebar-link'>
+                                <i class="bi bi-file-earmark-medical-fill"></i>
+                                <span>Form Layout</span>
+                            </a>
+                        </li>
+
+                       
+                        <li class="sidebar-item  ">
+                            <a href="table-datatable.html" class='sidebar-link'>
+                                <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                                <span>Datatable</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+                <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+            </div>
+        </div>
+        <div id="main">
+            <header class="mb-3">
+                <a href="#" class="burger-btn d-block d-xl-none">
+                    <i class="bi bi-justify fs-3"></i>
+                </a>
+            </header>
+
+              
+                <section id="multiple-column-form">
+                    <div class="row match-height">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Campaign Form</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <form class="form">
+                                            <div class="row">
+                                                
+                                                    <div class="col-md-6 col-12">
+                                                        <div class="form-group">
+                                                            <label for="campaign-name-column">Campaign Name</label>
+                                                            <input type="text" id="campaign-name-column" class="form-control"
+                                                                placeholder="Campaign Name" name="fname-column" required>
+                                                        </div>
+                                                    </div>
+
+
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="campaign-id-column">Campaign ID</label>
+                                                        <input type="number" min="0" id="campaign-id-column" class="form-control"
+                                                            placeholder="Campaign ID" name="lname-column" required>
+                                                    </div>
+                                                </div>
+
+                                                
+                                                <div class="col-md-3 col-12">
+                                                  <div class="form-group">
+                                                      <label for="client-code-select">Client Code</label>
+                                                      <fieldset class="form-group">
+                                                      <select class="form-select" id="client-code-select" style="width: 210px;">
+                                                        <option value="cs">CS</option>
+                                                        <option value="survey">Survey</option>
+                                                        <option value="eblast">eblast</option>
+                                                    </select>
+                                                  </fieldset>
+                                                  </div>
+                                              </div>
+
+                                                <div class="col-md-3 col-12">
+                                                  <div class="form-group">
+                                                      <label for="category-select">Category</label>
+
+                                                      
+                                                      <!-- CS options -->
+                                                      <fieldset class="form-group csOptions">
+                                                      <select class="form-select" id="category-select" style="width: 210px;">
+                                                        <option value="TGIF (email marketing)">TGIF</option>
+                                                        <option value="ACE">ACE</option>
+                                                        <option value="VIBE">VIBE</option>
+                                                        <option value="IP">IP</option>
+                                                        <option value="TAJ (ARC)">TAJ (ARC)</option>
+                                                        <option value="RAY (INSTA)">RAY (INSTA)</option>
+                                                        <option value="MTH">MTH</option>
+                                                        <option value="Magento">Magento</option>
+                                                        <option value="W8 (CS)">W8 (CS)</option>
+                                                    </select>
+                                                  </fieldset>
+
+                                                  <!-- Survey options -->
+                                                  <fieldset class="form-group surveyOptions" style="display: none;">
+                                                    <select class="form-select" id="category-select" style="width: 210px;">
+                                                      <option value="PKT">PKT</option>
+                                                      <option value="API">API</option>
+                                                      <option value="W8-RB">W8-RB</option>
+                                                      <option value="W8-LE">W8-LE</option>
+                                                      <option value="W8-LA">W8-LA</option>
+                                                      <option value="W8-Techscore">W8-Techscore</option>
+                                                      <option value="ITBP-Techscore">ITBP-Techscore</option>
+                                                      <option value="MTH API">MTH API</option>
+                                                      <option value="ITBP PKT (.NET)">ITBP PKT (.NET)</option>
+                                                      <option value="Email ijp">Email IJP</option>
+                                                  </select>
+                                                </fieldset>
+
+                                                 <!-- E Blast options -->
+                                                 <fieldset class="form-group eblastOptions" style="display: none;">
+                                                  <select class="form-select" id="category-select" style="width: 210px;">
+                                                    <option value="ACE eblast">ACE eblast</option>
+                                                    <option value="W8 eblast">W8 eblast</option>
+                                                </select>
+                                              </fieldset>
+                                                  </div>
+                                              </div>
+                                      
+                                                <div class="col-md-3 col-12">
+                                                    <div class="form-group">
+                                                        <label for="country-floating">Country</label>
+                                                        <fieldset class="form-group">
+                                                          <select class="form-select" id="country-select"  style="width: 210px;">
+                                                            <option value="EU">EU</option>
+                                                            <option value="NON-EU">NON-EU</option>
+                                                        </select>
+                                                      </fieldset>
+                                                    </div>
+                                                </div>
+
+                                         
+                                                <!-- <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="company-column">Company</label>
+                                                        <input type="text" id="company-column" class="form-control"
+                                                            name="company-column" placeholder="Company" required>
+                                                    </div>
+                                                </div> -->
+
+
+                                                <!-- <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="made-by-column">Made by</label>
+                                                        <input type="text" id="made-by-column" class="form-control"
+                                                            name="made-by-column" placeholder="Made by" required>
+                                                    </div>
+                                                </div>
+                                                 -->
+
+                                                <div class="card-body">
+                                                    <div class="form-group mb-3">
+                                                        <label for="asset-link-data" class="form-label">
+                                                        Paste Excel Table Here    
+                                                        </label>
+                                                        <textarea class="form-control" id="asset-link-data"
+                                                            rows="5" required></textarea>
+                                                    </div>
+                                                                                                    
+                                                    <div class="form-group mb-3">
+                                                        <label for="comment" class="form-label">
+                                                        Comment    
+                                                        </label>
+                                                        <textarea class="form-control" placeholder="If Any" id="comment"
+                                                            rows="2"></textarea>
+                                                    </div>
+                                                </div>
+
+                                                <!-- To Show Asset name and links in table form, if want remove style-->
+                                                <div id="output"  style="height: 0px; overflow: hidden;"  >
+                                                    <table id="excelDataTable"></table>
+                                                  </div>
+                                                  <!-- ******************************* -->
+
+                                                <div class="col-12 d-flex justify-content-end">
+                                                    <button type="submit"
+                                                        class="btn btn-primary me-1 mb-1">Submit</button>
+                                                    <button type="reset"
+                                                        class="btn btn-light-secondary me-1 mb-1" id="resetBtn">Reset</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+              </div>
+
+            <footer>
+             
+            </footer>
+        </div>
+    </div>
+    <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+
+    <script src="assets/js/main.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+        <!-- this is dependency required to convert excel data to json -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Dynatable/0.3.1/jquery.dynatable.min.js"></script>
+  
+  <script>
+
+    // ************************** below code change category acording to client code **********************
+    
+    $("#client-code-select").change(function(){
+      if ($(this).val()=='survey') {
+        $(".csOptions").css("display", "none");
+        $(".eblastOptions").css("display", "none");                                         
+        $(".surveyOptions").css("display", "inline-block");
+      }else if($(this).val()=='cs'){
+        $(".csOptions").css("display", "inline-block");
+        $(".surveyOptions").css("display", "none");     
+        $(".eblastOptions").css("display", "none");                                                                             
+      }else{
+        $(".csOptions").css("display", "none");
+        $(".surveyOptions").css("display", "none");                                         
+        $(".eblastOptions").css("display", "inline-block");                                         
+
+      }
+});
+$("#resetBtn").click(function(){
+        $(".csOptions").css("display", "inline-block");
+        $(".surveyOptions").css("display", "none");      
+        $(".eblastOptions").css("display", "none");                                         
+                                   
+});
+
+
+// ********************* below code to convert table to JSON ****************
+var assetLinkJson;
+$(document).ready(function() {
+                var customCellWriter = function(column, record) {
+                  var html = column.attributeWriter(record),
+                    td = '<td';
+                  if (column.hidden || column.textAlign) {
+                    td += ' style="';
+                    if (column.hidden) {
+                      td += 'display: none;';
+                    }
+                    if (column.textAlign) {
+                      td += 'text-align: ' + column.textAlign + ';';
+                    }
+                    td += '"';
+                  }
+                  return td + '><div>' + html + '<\/td>';
+                };
+                var makeElementEditable = function(element) {
+                  $('div', element).attr('contenteditable', true);
+                  $(element).focusout(function() {
+                    $('div', element).attr('contenteditable', false);
+                  });
+                  $(element).keydown(function(e) {
+                    if (e.which == 13) {
+                      e.preventDefault();
+                      $('div', element).attr('contenteditable', false);
+                      $(document).focus();
+                    }
+                  });
+                  $('div', element).on('paste', function(e) {
+                    e.preventDefault();
+                  });
+                };
+                // $(document).on('keypress', 'textarea#jsonDataDump', function(e) {
+                //   e.preventDefault();
+                //   e.stopPropagation();
+                // });
+                // $(document).on('keypress', 'textarea#asset-link-data', function(e) {
+                //   if (e.ctrlKey !== true && e.key != 'v') {
+                //     e.preventDefault();
+                //     e.stopPropagation();
+                //   }
+                // });
+                $(document).on('paste', 'textarea#asset-link-data', function(e) {
+                //   e.preventDefault();
+                  var cb;
+                  var clipText = '';
+                  if (window.clipboardData && window.clipboardData.getData) {
+                    cb = window.clipboardData;
+                    clipText = cb.getData('Text');
+                  } else if (e.clipboardData && e.clipboardData.getData) {
+                    cb = e.clipboardData;
+                    clipText = cb.getData('text/plain');
+                  } else {
+                    cb = e.originalEvent.clipboardData;
+                    clipText = cb.getData('text/plain');
+                  }
+                  var clipRows = clipText.split('\n');
+                  for (i = 0; i < clipRows.length; i++) {
+                    clipRows[i] = clipRows[i].split('\t');
+                  }
+                  var jsonObj = [];
+                  for (i = 0; i < clipRows.length - 1; i++) {
+                    var item = {};
+                    for (j = 0; j < clipRows[i].length; j++) {
+                      if (clipRows[i][j] != '\r') {
+                        if (clipRows[i][j].length !== 0) {
+                          item[j] = clipRows[i][j];
+                        }
+                      }
+                    }
+                    jsonObj.push(item);
+                  }
+                  $('textarea#jsonDataDump').val('');
+                  var tablePlaceHolder = document.getElementById('output');
+                  tablePlaceHolder.innerHTML = '';
+                  var table = document.createElement('table');
+                  table.id = 'excelDataTable';
+                  table.className = 'table';
+                  var header = table.createTHead();
+                  var row = header.insertRow(0);
+                  var keys = [];
+                  for (var i = 0; i < jsonObj.length; i++) {
+                    var obj = jsonObj[i];
+                    for (var j in obj) {
+                      if ($.inArray(j, keys) == -1) {
+                        keys.push(j);
+                      }
+                    }
+                  }
+                  keys.forEach(function(value, index) {
+                    var headerCell = document.createElement('th');
+                    headerCell.innerHTML = '<div>' + value + '<\/div>';
+                    $(headerCell).click(function() {
+                      makeElementEditable(this);
+                    });
+                    $(headerCell).keyup(function(e) {
+                      var ignoredClass = 'ignored';
+                      var ignoredAttr = 'data-attr-ignore';
+                      var columnCells = $('td, th', table).filter(':nth-child(' + ($(this).index() + 1) + ')');
+                      $(this).removeAttr(ignoredAttr);
+                      $(columnCells).each(function() {
+                        $(this).removeClass(ignoredClass);
+                        $(this).removeAttr(ignoredAttr);
+                      });
+                      if ($(this).is(':empty') || $(this).text().trim() === '') {
+                        $(this).attr(ignoredAttr, '');
+                        $(columnCells).each(function() {
+                          $(this).addClass(ignoredClass);
+                          $(this).attr(ignoredAttr, '');
+                        });
+                      }
+                    });
+                    var cell = row.insertCell(index);
+                    cell.parentNode.insertBefore(headerCell, cell);
+                    cell.parentNode.removeChild(cell);
+                  });
+                  tablePlaceHolder.appendChild(table);
+                  var excelDynaTable = $('table#excelDataTable').dynatable({
+                    features: {
+                      paginate: false,
+                      search: false,
+                      recordCount: true,
+                      sort: false
+                    },
+                    dataset: {
+                      records: jsonObj
+                    },
+                    writers: {
+                      _cellWriter: customCellWriter
+                    }
+                  });
+
+                  // below code convert table to json automatically after pasting*******************************
+                  var $rows = $('table#excelDataTable').find('tr:not(:hidden)');
+                  var headers = [];
+                  var data = [];
+                  $($rows.shift()).find('th:not(:empty):not([data-attr-ignore])').each(function() {
+                    console.log('[' + $(this).text().toLowerCase() + ']');
+                    headers.push($(this).text().toLowerCase());
+                  });
+                  $rows.each(function() {
+                    var $td = $(this).find('td:not([data-attr-ignore])');
+                    var h = {};
+                    headers.forEach(function(header, i) {
+                      h[header] = $td.eq(i).text();
+                    });
+                    data.push(h);
+                  });
+                  var jsonString = JSON.stringify(data, null, 2);
+                  $('textarea#jsonDataDump').val(jsonString);
+                   console.log(jsonString);
+                 assetLinkJson=data;
+                  assetLinkJson.forEach(element => {
+                      delete Object.assign(element, {['title']: element['0'] })['0'];
+                      delete Object.assign(element, {['link']: element['1'] })['1'];
+                    });
+                  // ***************************************************************
+
+                  $(document).on('click', 'table#excelDataTable td', function() {
+                    makeElementEditable(this);
+                  });
+                });
+                jQuery.fn.pop = [].pop;
+                jQuery.fn.shift = [].shift;
+
+                  // below code convert table to json manually using button click  *******************************
+
+                // $(document).on('click', 'button#exportJsonData', function() {
+                //   var $rows = $('table#excelDataTable').find('tr:not(:hidden)');
+                //   var headers = [];
+                //   var data = [];
+                //   $($rows.shift()).find('th:not(:empty):not([data-attr-ignore])').each(function() {
+                //     console.log('[' + $(this).text().toLowerCase() + ']');
+                //     headers.push($(this).text().toLowerCase());
+                //   });
+                //   $rows.each(function() {
+                //     var $td = $(this).find('td:not([data-attr-ignore])');
+                //     var h = {};
+                //     headers.forEach(function(header, i) {
+                //       h[header] = $td.eq(i).text();
+                //     });
+                //     data.push(h);
+                //   });
+                //   var jsonString = JSON.stringify(data, null, 2);
+                //   $('textarea#jsonDataDump').val(jsonString);
+                //   console.log(jsonString);
+                // });
+              });
+
+              
+              // *************************** After Submit function *************************************
+                  $(document).ready(function () {
+                  $("form").submit(function (event) {
+ 
+                    var formData = {
+                      cname: $("#campaign-name-column").val(),
+                      cid: $("#campaign-id-column").val(),
+                      category: $("#category-select").val(),
+                      client_code: $("#client-code-select").val(),
+                      country: $("#country-select").val(),
+                      asset_link_data: assetLinkJson,
+                      comment: $("#comment").val(),
+                    };
+                    console.log(formData)
+                                                                          
+                    $.ajax({
+                      type: "POST",
+                      url: "http://localhost:1010/app/v1/form-data",
+                      data: JSON.stringify(formData),
+                      dataType: "json",
+                      contentType: "application/json; charset=utf-8",
+                      encode: true,
+                    }).done(function (data) {
+                      console.log(data);
+                    });
+
+                    event.preventDefault();
+                  });
+                });
+       // ***********************************************************************
+    </script>
+
+
+</body>
+
+</html>
