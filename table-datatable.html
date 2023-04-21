@@ -421,6 +421,8 @@
     <script  src="https://cdn.datatables.net/1.11.1/js/dataTables.bootstrap5.min.js"></script>
         <!-- this is dependency required to convert excel data to json -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Dynatable/0.3.1/jquery.dynatable.min.js"></script>
+    <script src="./assets/js/extensions/sweetalert2.js"></script>
+    <script src="./assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
         <script>
     
              $('#table1').on('mouseover', 'tbody tr', function () {
@@ -431,7 +433,9 @@
     
 //    ############### Below code is to Fetch and display table data #####################
 
-          fetch('http://localhost:1010/camp-list/camp-data')
+          fetch('http://localhost:1010/camp-list/camp-data', {
+          credentials: 'include',
+        })
           .then(response => response.json())
           .then(json => {const data=json;
             table = $('#table1').DataTable({
@@ -447,7 +451,11 @@
                { data: 'status' }
              ]
            })
-        });
+        }).catch(err => alert("INVALID")
+        
+        
+        
+        );
 
 // #########################################################################
 $('#cancelBtn').click(function(){
@@ -659,6 +667,37 @@ $(document).ready(function() {
                 //   console.log(jsonString);
                 // });
               });
+    </script>
+    <script>
+   
+
+$("#success").click(function () {
+    swal.fire({
+        title: "Error",
+        text: "enter Your",
+        icon: "error",
+        confirmButtonText: "Ok"
+    });
+
+});
+$("#error").click(function () {
+    swal.fire({
+        title: "Error",
+        text: "enter Your",
+        icon: "error",
+        confirmButtonText: "Ok"
+    });
+});
+$("#warning").click(function () {
+    swal.fire({
+        title: "Warning",
+        text: "enter Your",
+        icon: "warning",
+        confirmButtonText: "Ok"
+    });
+});
+
+</script>
     </script>
 
 </body>
