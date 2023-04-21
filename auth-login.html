@@ -168,9 +168,12 @@
                         withCredentials:true
                     },
                     success: function (data) {
+
                         console.log(data);
+
                         if (data.status === "ok") {
-                            document.cookie = `token = ${data.token}`
+                           // document.cookie = `token = ${data.token}`
+
                             swal.fire({
                                 title: "Logged in successfully",
                                 text: data,

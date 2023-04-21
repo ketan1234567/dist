@@ -421,6 +421,9 @@
     <script  src="https://cdn.datatables.net/1.11.1/js/dataTables.bootstrap5.min.js"></script>
         <!-- this is dependency required to convert excel data to json -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Dynatable/0.3.1/jquery.dynatable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
+        integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="./assets/js/extensions/sweetalert2.js"></script>
     <script src="./assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
         <script>
@@ -451,7 +454,19 @@
                { data: 'status' }
              ]
            })
-        }).catch(err => alert("INVALID")
+        }).catch(err =>{swal.fire({
+                                title: "Error",
+                                text: "error",
+                                icon: "error",
+                                confirmButtonText: "Ok"
+                            }).then(function (result) {
+                                if (true) {
+                                  window.location = "http://localhost/New%20folder%20(11)/dist/auth-login.html";
+                                }
+                            })
+                          }
+
+
         
         
         
