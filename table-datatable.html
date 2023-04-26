@@ -320,7 +320,17 @@
                { data: 'status' }
              ]
            })
-        }).catch(err => alert("INVALID")
+        }).catch(err => {swal.fire({
+                                title: "Error",
+                                text: "Please Login",
+                                icon: "error",
+                                confirmButtonText: "Ok"
+                            }).then(function (err) {
+                               
+                                  window.location = "http://localhost/New%20folder%20(11)/dist/auth-login.html";
+                                
+                            })
+                          }
         
         
         
