@@ -3,6 +3,7 @@
 <!-- hii raj -->
 
 <!--ketan-->
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" href="assets/vendors/apexcharts/apexcharts.css">
 
     <link rel="stylesheet" href="assets/vendors/iconly/bold.css">
 
@@ -18,6 +20,65 @@
     <link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css">
     <link rel="stylesheet" href="assets/css/app.css">
     <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon">
+
+    <style>
+        body {
+            background: #dee3eb;
+        }
+
+        #dashSearch {
+            border: none;
+            padding: 5px 10px;
+            margin: 0px 10px 5px 10px;
+            border: 1px solid #c4cad3;
+            outline: none;
+            border-radius: 10px;
+        }
+
+        .searchBoxOuter {
+            position: relative;
+        }
+
+        .autocom-box {
+            padding: 0;
+            opacity: 0;
+            pointer-events: none;
+            max-height: 280px;
+            overflow-y: auto;
+            padding: 10px 8px;
+            opacity: 1;
+            pointer-events: auto;
+            position: absolute;
+            background: #f2f7ff;
+            width: 100%;
+            top: 95%;
+            display: none;
+            border-radius: 0px 0px 10px 10px;
+            /* box-shadow: 0px 24px 60px -30px rgba(0,0,0,0.75); */
+            box-shadow: 0px 24px 50px -20px rgba(0,0,0,0.75);
+
+
+        }
+
+        .autocom-box.active {
+            display: block;
+            z-index: 60;
+        }
+
+        .autocom-box li {
+            list-style: none;
+            padding: 8px 12px;
+            display: block;
+            width: 100%;
+            cursor: default;
+            border-radius: 3px;
+            border-bottom: 1px solid rgb(204, 204, 204);
+        }
+
+        .autocom-box li:hover {
+            background: #efefef;
+        }
+    </style>
 </head>
 
 <body>
@@ -27,10 +88,10 @@
     <div id="app">
         <div id="sidebar" class="active">
             <div class="sidebar-wrapper active">
-                <div class="sidebar-header">
-                    <div class="d-flex justify-content-between">
+                <div class="sidebar-header py-0">
+                    <div class="d-flex justify-content-center">
                         <div class="logo">
-                            <a href="index.html"><img src="assets/images/logo/logo.png" alt="Logo" srcset=""></a>
+                            <a href="index.html"><img style="height: 100px;" src="https://png.pngtree.com/element_our/png/20180911/background-material-design-for-lorem-ipsum-logo-png_89715.jpg" alt="Logo" srcset=""></a>
                         </div>
                         <div class="toggler">
                             <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
@@ -39,7 +100,7 @@
                 </div>
                 <div class="sidebar-menu">
                     <ul class="menu">
-                        <li class="sidebar-title">Menu</li>
+                        <li class="sidebar-title mt-0">Menu</li>
 
                         <li class="sidebar-item active ">
                             <a href="index.html" class='sidebar-link'>
@@ -48,26 +109,12 @@
                             </a>
                         </li>
 
-                    
-
-                     
-
-                    
-
-                        <li class="sidebar-title">Forms &amp; Tables</li>
-
-                    
-
                         <li class="sidebar-item  ">
                             <a href="form-layout.html" class='sidebar-link'>
                                 <i class="bi bi-file-earmark-medical-fill"></i>
                                 <span>Form Layout</span>
                             </a>
                         </li>
-
-                   
-
-                       
 
                         <li class="sidebar-item  ">
                             <a href="table-datatable.html" class='sidebar-link'>
@@ -76,326 +123,337 @@
                             </a>
                         </li>
 
-                    
-
-                      
-                        </li>
-
-                  
-
-                       
-
-                     
-
-                        <li class="sidebar-title">Pages</li>
-
-                    
-
-                     
-
-                        <li class="sidebar-item  has-sub">
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-person-badge-fill"></i>
-                                <span>Authentication</span>
-                            </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item ">
-                                    <a href="auth-login.html">Login</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="auth-register.html">Register</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="auth-forgot-password.html">Forgot Password</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="sidebar-item  has-sub">
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-x-octagon-fill"></i>
-                                <span>Errors</span>
-                            </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item ">
-                                    <a href="error-403.html">403</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="error-404.html">404</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="error-500.html">500</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                   
 
                     </ul>
                 </div>
                 <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
             </div>
         </div>
-        <div id="main">
+        <div id="main" class="py-1">
             <header class="mb-3">
                 <a href="#" class="burger-btn d-block d-xl-none">
                     <i class="bi bi-justify fs-3"></i>
                 </a>
             </header>
-
-            <div class="page-heading">
-                <h3>Profile ONDIRECT</h3>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h3>DashBoard</h3>
+                <button class="btn btn-danger" style="padding: 3px 20px;">Log-out</button>
             </div>
             <div class="page-content">
-                <section class="row">
-                    <div class="col-12 col-lg-9">
-                        <div class="row">
-                            <div class="col-6 col-lg-3 col-md-6">
-                                <div class="card">
-                                    <div class="card-body px-3 py-4-5">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="stats-icon purple">
-                                                    <i class="iconly-boldShow"></i>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <h6 class="text-muted font-semibold">Profile Views</h6>
-                                                <h6 class="font-extrabold mb-0">112.000</h6>
-                                            </div>
-                                        </div>
-                                    </div>
+                <div class="row" style="justify-content: space-between;">
+                    <div class=" col-lg-3 col-md-6">
+                        <div class="card" style="padding: 10px 30px;">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h5 class="font-semibold text-muted">Total Campaigns</h5>
+                                    <h5 class="font-extrabold mb-0" id="campTotal" style="text-align: center;">1000</h5>
                                 </div>
-                            </div>
-                            <div class="col-6 col-lg-3 col-md-6">
-                                <div class="card">
-                                    <div class="card-body px-3 py-4-5">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="stats-icon blue">
-                                                    <i class="iconly-boldProfile"></i>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <h6 class="text-muted font-semibold">Followers</h6>
-                                                <h6 class="font-extrabold mb-0">183.000</h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-6 col-lg-3 col-md-6">
-                                <div class="card">
-                                    <div class="card-body px-3 py-4-5">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="stats-icon green">
-                                                    <i class="iconly-boldAdd-User"></i>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <h6 class="text-muted font-semibold">Following</h6>
-                                                <h6 class="font-extrabold mb-0">80.000</h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-6 col-lg-3 col-md-6">
-                                <div class="card">
-                                    <div class="card-body px-3 py-4-5">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="stats-icon red">
-                                                    <i class="iconly-boldBookmark"></i>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <h6 class="text-muted font-semibold">Saved Post</h6>
-                                                <h6 class="font-extrabold mb-0">112</h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- <div class="row">
-                            <div class="col-12">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h4>Profile Visit</h4>
-                                    </div>
-                                    <div class="card-body">
-                                        <div id="chart-profile-visit"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
-                        
-                        <!-- <div class="row">
-                            <div class="col-12 col-xl-4">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h4>Profile Visit</h4>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <div class="d-flex align-items-center">
-                                                    <svg class="bi text-primary" width="32" height="32" fill="blue"
-                                                        style="width:10px">
-                                                        <use
-                                                            xlink:href="assets/vendors/bootstrap-icons/bootstrap-icons.svg#circle-fill" />
-                                                    </svg>
-                                                    <h5 class="mb-0 ms-3">Europe</h5>
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <h5 class="mb-0">862</h5>
-                                            </div>
-                                            <div class="col-12">
-                                                <div id="chart-europe"></div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <div class="d-flex align-items-center">
-                                                    <svg class="bi text-success" width="32" height="32" fill="blue"
-                                                        style="width:10px">
-                                                        <use
-                                                            xlink:href="assets/vendors/bootstrap-icons/bootstrap-icons.svg#circle-fill" />
-                                                    </svg>
-                                                    <h5 class="mb-0 ms-3">America</h5>
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <h5 class="mb-0">375</h5>
-                                            </div>
-                                            <div class="col-12">
-                                                <div id="chart-america"></div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <div class="d-flex align-items-center">
-                                                    <svg class="bi text-danger" width="32" height="32" fill="blue"
-                                                        style="width:10px">
-                                                        <use
-                                                            xlink:href="assets/vendors/bootstrap-icons/bootstrap-icons.svg#circle-fill" />
-                                                    </svg>
-                                                    <h5 class="mb-0 ms-3">Indonesia</h5>
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <h5 class="mb-0">1025</h5>
-                                            </div>
-                                            <div class="col-12">
-                                                <div id="chart-indonesia"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-xl-8">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h4>Latest Comments</h4>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="table-responsive">
-                                            <table class="table table-hover table-lg">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Name</th>
-                                                        <th>Comment</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td class="col-3">
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="avatar avatar-md">
-                                                                    <img src="assets/images/faces/5.jpg">
-                                                                </div>
-                                                                <p class="font-bold ms-3 mb-0">Si Cantik</p>
-                                                            </div>
-                                                        </td>
-                                                        <td class="col-auto">
-                                                            <p class=" mb-0">Congratulations on your graduation!</p>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="col-3">
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="avatar avatar-md">
-                                                                    <img src="assets/images/faces/2.jpg">
-                                                                </div>
-                                                                <p class="font-bold ms-3 mb-0">Si Ganteng</p>
-                                                            </div>
-                                                        </td>
-                                                        <td class="col-auto">
-                                                            <p class=" mb-0">Wow amazing design! Can you make another
-                                                                tutorial for
-                                                                this design?</p>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
-
-
-                    </div>
-                    <div class="col-12 col-lg-3">
-                        <div class="card">
-                            <div class="card-body py-4 px-5">
-                                <div class="d-flex align-items-center">
-                                    <div class="avatar avatar-xl">
-                                        <img src="assets/images/faces/1.jpg" alt="Face 1">
-                                    </div>
-                                    <div class="ms-3 name">
-                                        <h5 class="font-bold">ONDIRECT PVT LTD</h5>
-                                        <h6 class="text-muted mb-0">@creativeondirect</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                   
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>Visitors Profile</h4>
-                            </div>
-                            <div class="card-body">
-                                <div id="chart-visitors-profile"></div>
                             </div>
                         </div>
                     </div>
-                </section>
+                    <div class=" col-lg-6 col-md-6">
+                        <div class="card searchBoxOuter">
+                            <h5 class="font-extrabold mb-2 mt-1" id="campTotal" style="text-align: center;">Search</h5>
+                            <input placeholder="Type here..." type="search" name="" id="dashSearch">
+                            <div class="autocom-box">
+                                <!-- here list are inserted from javascript -->
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class=" col-lg-3 col-md-6">
+                        <div class="card" style="padding: 14px 30px; text-align: center;">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h5 class="font-semibold text-muted">Raj Ingale</h5>
+                                    <h6 class="font-extrabold mb-0" id="campTotal" style="text-align: center;">105197</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="row" >
+                    <form class="form" id="totalLinkForm" style="display: inline-block; width: auto;" >
+
+                        <div class="column"
+                            style="background: #ffffff; padding: 25px 25px 0px 25px; border-radius: 10px;">
+                            <div class="  ">
+                                <div class="form-group">
+                                    <label for="client-code-select">Client Code</label>
+                                    <fieldset class="form-group">
+                                        <select class="form-select" id="client-code-select" style="width: 180px;">
+                                            <option value="CS">CS</option>
+                                            <option value="Survey">Survey</option>
+                                            <option value="eBlast">eBlast</option>
+                                        </select>
+                                    </fieldset>
+                                </div>
+                            </div>
+
+                            <div class=" " style="display: table-caption;">
+                                <div class="form-group">
+                                    <label for="category-select">Category</label>
+
+
+                                    <!-- CS options -->
+                                    <fieldset class="form-group csOptions">
+                                        <select class="form-select" id="category-select" style="width: 180px;">
+                                            <option value="TGIF (email marketing)">TGIF</option>
+                                            <option value="ACE">ACE</option>
+                                            <option value="VIBE">VIBE</option>
+                                            <option value="IP">IP</option>
+                                            <option value="TAJ (ARC)">TAJ (ARC)</option>
+                                            <option value="RAY (INSTA)">RAY (INSTA)</option>
+                                            <option value="MTH">MTH</option>
+                                            <option value="Magento">Magento</option>
+                                            <option value="W8 (CS)">W8 (CS)</option>
+                                        </select>
+                                    </fieldset>
+
+                                    <!-- Survey options -->
+                                    <fieldset class="form-group surveyOptions" style="display: none;">
+                                        <select class="form-select" id="category-select" style="width: 180px;">
+                                            <option value="PKT">PKT</option>
+                                            <option value="API">API</option>
+                                            <option value="W8-RB">W8-RB</option>
+                                            <option value="W8-LE">W8-LE</option>
+                                            <option value="W8-LA">W8-LA</option>
+                                            <option value="W8-Techscore">W8-Techscore</option>
+                                            <option value="ITBP-Techscore">ITBP-Techscore</option>
+                                            <option value="MTH API">MTH API</option>
+                                            <option value="ITBP PKT (.NET)">ITBP PKT (.NET)</option>
+                                            <option value="Email ijp">Email IJP</option>
+                                        </select>
+                                    </fieldset>
+
+                                    <!-- E Blast options -->
+                                    <fieldset class="form-group eblastOptions" style="display: none;">
+                                        <select class="form-select" id="category-select" style="width: 180px;">
+                                            <option value="ACE eblast">ACE eblast</option>
+                                            <option value="W8 eblast">W8 eblast</option>
+                                        </select>
+                                    </fieldset>
+                                </div>
+                            </div>
+
+                            <div class=" ">
+                                <div class="form-group">
+                                    <label for="country-floating">Country</label>
+                                    <fieldset class="form-group">
+                                        <select class="form-select" id="country-select" style="width: 180px;">
+                                            <option value="EU">EU</option>
+                                            <option value="NON-EU">NON-EU</option>
+                                        </select>
+                                    </fieldset>
+                                </div>
+                            </div>
+
+                            <div class=" " style="text-align: center; ">
+                                <div class="form-group">
+                                    <button class="btn btn-success mt-2 " type="button">Get Total</button>
+                                </div>
+                            </div>
+
+                            <div class="mt-4">
+                                <div class="card" style="text-align: center;">
+                                    <div class="row mb-3"
+                                        style="padding: 6px; border: 2px solid #c4cad3; border-radius: 10px;">
+                                        <div>
+                                            <h6 class="font-semibold text-muted">Total Links</h6>
+                                            <h5 class="font-extrabold mb-0" id="campTotal">5000</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="col-md-8" style="width:74.5%" > 
+                        <div class="card">
+                            <div class="card-header" style="padding: 10px 0px 0px 30px; margin-bottom: -10px;">
+                                <h4>Monthly Campaign Chart</h4>
+                            </div>
+                            <div class="card-body" style="padding-bottom: 0px;">
+                                <div id="area"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <footer>
-                <div class="footer clearfix mb-0 text-muted">
-                    <div class="float-start">
-                        <p>2021 &copy; ONDIRECT</p>
-                    </div>
-                    <div class="float-end">
-                        <p>Crafted with <span class="text-danger"><i class="bi bi-heart"></i></span> by <a
-                                href="http://ahmadsaugi.com">A. Saugi</a></p>
-                    </div>
-                </div>
+
             </footer>
         </div>
     </div>
+    <script src="assets/vendors/apexcharts/apexcharts.js"></script>
+    <!-- <script src="assets/js/pages/ui-apexchart.js"></script> -->
     <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
 
-    <script src="assets/vendors/apexcharts/apexcharts.js"></script>
     <script src="assets/js/pages/dashboard.js"></script>
 
     <script src="assets/js/main.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+    <script>
+        // ************************** below code change category acording to client code **********************
+
+        $("#client-code-select").change(function () {
+            if ($(this).val() == 'survey') {
+                $(".csOptions").css("display", "none");
+                $(".eblastOptions").css("display", "none");
+                $(".surveyOptions").css("display", "inline-block");
+            } else if ($(this).val() == 'cs') {
+                $(".csOptions").css("display", "inline-block");
+                $(".surveyOptions").css("display", "none");
+                $(".eblastOptions").css("display", "none");
+            } else {
+                $(".csOptions").css("display", "none");
+                $(".surveyOptions").css("display", "none");
+                $(".eblastOptions").css("display", "inline-block");
+
+            }
+        });
+//**************************************************
+$('.searchBoxOuter').focusin(function(){
+    $(this).css('background','#f2f7ff');
+})
+$('.searchBoxOuter').focusout(function(){
+    $(this).css('background','white');
+})
+
+        // ###################### below code is for search bar ########################
+        let suggestions = ["Channel",
+            "CodingLab",
+            "CodingNepal",
+            "YouTube",
+            "YouTuber",
+            "YouTube Channel",
+            "Blogger",
+            "Bollywood",
+            "Vlogger",
+            "Vechiles",
+            "Facebook",
+            "Freelancer",
+            "Facebook Page",
+            "Designer",
+            "Developer",
+            "Web Designer"]
+
+        let suggestLength = 5;
+
+        $('#dashSearch').keyup(function (e) {
+            let userData = e.target.value;
+            let emptyArray = [];
+
+
+            if (userData.length >= 3) {
+                // ajax code here to fetch list continuisly
+                $.ajax({
+                    type: "POST",
+                    url: "",
+                    data: userData,
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    encode: true,
+                }).done(function (data) {
+                    console.log(data);
+                    // suggestions=data;
+                });
+
+                emptyArray = suggestions.filter((data) => {
+                    return data.toLocaleLowerCase().startsWith(userData.toLocaleLowerCase());
+                });
+                let finalSuggestlist = '';
+                for (let i = 0; i < suggestLength; i++) {
+                    if (emptyArray[i] != null) {
+
+                        finalSuggestlist += `<li>${emptyArray[i]}</li>`;
+
+                    }
+                }
+                // emptyArray = emptyArray.map((data)=>{
+                //     // passing return data inside li tag
+                //     return data = `<li>${data}</li>`;
+                // });
+                $('.autocom-box').html(finalSuggestlist);
+                $('.autocom-box').addClass("active");
+            } else {
+                $('.autocom-box').removeClass("active");
+            }
+
+        });
+
+        // ***************************below code id to get total links**********************
+        $('#totalLinkForm').submit(function (e) { 
+            e.preventDefault();
+            let totalLinkData={
+                client_code: $('#client-code-select').val(),
+                category:$('#category-select').val(),
+                country:$('#country-select').val()
+            }
+
+            $.ajax({
+                      type: "POST",
+                      url: "",
+                      data: JSON.stringify(totalLinkData),
+                      dataType: "json",
+                      contentType: "application/json; charset=utf-8",
+                      encode: true,
+                    }).done(function (data) {
+                      
+                     $('#campTotal').html(data);
+                    });
+        });
+    </script>
+    <script>
+        // below code for chart*************************************************
+
+        var areaOptions = {
+   series: [
+     {
+       name: "campaigns",
+       data: [31, 40, 28, 51, 42, 109, 100],
+     }
+   ],
+   chart: {
+     height: 350,
+     type: "area",
+   },
+   dataLabels: {
+     enabled: false,
+   },
+   stroke: {
+     curve: "smooth",
+   },
+   xaxis: {
+     type: "datetime",
+     categories: [
+       "2018-09-19T00:00:00.000Z",
+       "2018-09-19T01:30:00.000Z",
+       "2018-09-19T02:30:00.000Z",
+       "2018-09-19T03:30:00.000Z",
+       "2018-09-19T04:30:00.000Z",
+       "2018-09-19T05:30:00.000Z",
+       "2018-09-19T06:30:00.000Z",
+     ],
+   },
+   tooltip: {
+     x: {
+       format: "dd/MM/yy HH:mm",
+     },
+   },
+ };
+
+        var area = new ApexCharts(document.querySelector("#area"), areaOptions);
+        area.render();
+    </script>
 </body>
 
 </html>
