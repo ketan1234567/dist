@@ -82,7 +82,7 @@
     </style>
 </head>
 
-<body >
+<body  onload="checkuser()">
     <div id="app">
         <div id="sidebar" class="active">
             <div class="sidebar-wrapper active">
@@ -452,6 +452,33 @@ $('.searchBoxOuter').focusout(function(){
         var area = new ApexCharts(document.querySelector("#area"), areaOptions);
         area.render();
     </script>
+        <script>
+            function checkuser(){
+                const check = document.cookie;
+               // alert(check)
+                if(check==''){
+                    swal.fire({
+                title: "Error",
+                text: "expired cookie Please Login",
+                icon: "error",
+                confirmButtonText: "Ok"
+            }).then(function (err) {
+                          window.location = "http://localhost/New%20folder%20(11)/dist/auth-login.html";    
+                             })
+                }else{
+                var base64Url = check.split('.')[1];
+                var check2=atob(base64Url)
+                var check3=JSON.parse(check2)
+                var check4=check3.firstname
+                alert(check4)
+                }
+         
+    
+            }
+            checkuser()
+        </script>
+    
+   
 </body>
 
 </html>
