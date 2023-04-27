@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form Layout - Mazer Admin Dashboard</title>
+    <title>Form Layout</title>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -20,10 +20,10 @@
     <div id="app">
         <div id="sidebar" class="active">
             <div class="sidebar-wrapper active">
-                <div class="sidebar-header">
-                    <div class="d-flex justify-content-between">
+              <div class="sidebar-header py-0">
+                <div class="d-flex justify-content-center">
                         <div class="logo">
-                            <a href="index.html"><img src="assets/images/logo/logo.png" alt="Logo" srcset=""></a>
+                            <a href="index.html"><img style="height: 100px;" src="https://png.pngtree.com/element_our/png/20180911/background-material-design-for-lorem-ipsum-logo-png_89715.jpg" alt="Logo" srcset=""></a>
                         </div>
                         <div class="toggler">
                             <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
@@ -104,9 +104,9 @@
                                                       <label for="client-code-select">Client Code</label>
                                                       <fieldset class="form-group">
                                                       <select class="form-select" id="client-code-select" style="width: 210px;">
-                                                        <option value="cs">CS</option>
-                                                        <option value="survey">Survey</option>
-                                                        <option value="eblast">eblast</option>
+                                                        <option value="CS">CS</option>
+                                                        <option value="Survey">Survey</option>
+                                                        <option value="eBlast">eBlast</option>
                                                     </select>
                                                   </fieldset>
                                                   </div>
@@ -243,7 +243,8 @@
 
         <!-- this is dependency required to convert excel data to json -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Dynatable/0.3.1/jquery.dynatable.min.js"></script>
-  
+    <script src="./assets/js/extensions/sweetalert2.js"></script>
+    <script src="./assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
   <script>
 
     // ************************** below code change category acording to client code **********************
@@ -488,8 +489,14 @@ $(document).ready(function() {
                       encode: true,
                     }).done(function (data) {
                       console.log(data);
+                      $("#resetBtn").click();
+                      swal.fire({
+                                title: "Data Added Successfully",
+                                text: data,
+                                icon: "success",
+                                confirmButtonText: "Ok",
+                            })
                     });
-
                     event.preventDefault();
                   });
                 });
