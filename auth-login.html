@@ -172,7 +172,7 @@
                         console.log(data);
 
                         if (data.status === "ok") {
-                           // document.cookie = `token = ${data.token}`
+                           //document.cookie = `token = ${data.data}`
 
                             swal.fire({
                                 title: "Logged in successfully",
@@ -194,11 +194,7 @@
                                 icon: "error",
                                 confirmButtonText: "Ok"
                             });
-
-
-
                         }
-
                     }
                     ,
                     error: function (data) {
@@ -208,8 +204,6 @@
             });
         });
     </script>
-
-
     <script src="./assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="./assets/js/bootstrap.bundle.min.js"></script>
 
