@@ -20,12 +20,11 @@
     <style>
         .popupOuter{
             z-index: 50;
-            height: 100vh;
             width: 100vw;
+            height: 100vh;
             background-color: rgba(0,0,0,.5);
             position: fixed;
             display: flex;
-            align-items: center;
             justify-content: center;
             display: none;
             overflow: scroll;
@@ -35,7 +34,9 @@
             width: 70%;
             padding: 10px 20px;
             border-radius: 10px;
-        }
+            display: table;
+            margin-top: 30px;
+          }
         .editDetails>p{
             display: inline-block;
         }
@@ -48,139 +49,16 @@
             display: flex;
             align-items: baseline;
         }
+        #asset-link-table{
+          width: 100%;
+        }
+        hr{
+  border: 1px solid grey;
+}
     </style>
 </head>
 
 <body>
-
-<!-- ################################ This is popup window for campaign details with all Updates Options ############################### -->
-
-    <!-- <div class="popupOuter">
-        <div class="popup">
-            
-           <form action="" method="post" id="popupForm">
-            <div class="editDetails">
-                <p>Last Updated By : Raj Ingale</p>
-                <div class="col-3 d-flex justify-content-end">
-                    <button type="submit"
-                        class="btn btn-primary me-1 mb-1" id="editBtn">Edit</button>
-                    <button type="button"
-                        class="btn btn-light-secondary me-1 mb-1" id="cancelBtn">Cancel</button>
-                </div>
-            </div>
-            <div class="row">
-                                                
-                <div class="col-md-6 col-12">
-                    <div class="form-group">
-                        <label for="campaign-name-column">Campaign Name</label>
-                        <input type="text" id="campaign-name-column" class="form-control toggleInputAccess"
-                            placeholder="Campaign Name" name="fname-column" required disabled >
-                    </div>
-                </div>
-
-
-            <div class="col-md-6 col-12">
-                <div class="form-group">
-                    <label for="campaign-id-column">Campaign ID</label>
-                    <input type="number" min="0" id="campaign-id-column" class="form-control toggleInputAccess"
-                        placeholder="Campaign ID" name="lname-column" required disabled>
-                </div>
-            </div>
-
-            
-            <div class="col-md-3 col-12">
-              <div class="form-group">
-                  <label for="client-code-select">Client Code</label>
-                  <fieldset class="form-group">
-                  <select class="form-select toggleInputAccess" id="client-code-select" style="width: 210px;" disabled>
-                    <option value="cs">CS</option>
-                    <option value="survey">Survey</option>
-                    <option value="eblast">eblast</option>
-                </select>
-              </fieldset>
-              </div>
-          </div>
-
-            <div class="col-md-3 col-12">
-              <div class="form-group">
-                  <label for="category-select">Category</label>
-
-                  
-                  <!-- CS options 
-                  <fieldset class="form-group csOptions">
-                  <select class="form-select toggleInputAccess" id="category-select" style="width: 210px;" disabled>
-                    <option value="TGIF (email marketing)">TGIF</option>
-                    <option value="ACE">ACE</option>
-                    <option value="VIBE">VIBE</option>
-                    <option value="IP">IP</option>
-                    <option value="TAJ (ARC)">TAJ (ARC)</option>
-                    <option value="RAY (INSTA)">RAY (INSTA)</option>
-                    <option value="MTH">MTH</option>
-                    <option value="Magento">Magento</option>
-                    <option value="W8 (CS)">W8 (CS)</option>
-                </select>
-              </fieldset>
-
-              <!-- Survey options 
-              <fieldset class="form-group surveyOptions" style="display: none;">
-                <select class="form-select toggleInputAccess" id="category-select" style="width: 210px;" disabled>
-                  <option value="PKT">PKT</option>
-                  <option value="API">API</option>
-                  <option value="W8-RB">W8-RB</option>
-                  <option value="W8-LE">W8-LE</option>
-                  <option value="W8-LA">W8-LA</option>
-                  <option value="W8-Techscore">W8-Techscore</option>
-                  <option value="ITBP-Techscore">ITBP-Techscore</option>
-                  <option value="MTH API">MTH API</option>
-                  <option value="ITBP PKT (.NET)">ITBP PKT (.NET)</option>
-                  <option value="Email ijp">Email IJP</option>
-              </select>
-            </fieldset>
-
-             <!-- E Blast options 
-             <fieldset class="form-group eblastOptions" style="display: none;">
-              <select class="form-select toggleInputAccess" id="category-select" style="width: 210px;" disabled>
-                <option value="ACE eblast">ACE eblast</option>
-                <option value="W8 eblast">W8 eblast</option>
-            </select>
-          </fieldset>
-              </div>
-          </div>
-  
-            <div class="col-md-3 col-12">
-                <div class="form-group">
-                    <label for="country-floating">Country</label>
-                    <fieldset class="form-group">
-                      <select class="form-select toggleInputAccess" id="country-select"  style="width: 210px;" disabled>
-                        <option value="EU">EU</option>
-                        <option value="NON-EU">NON-EU</option>
-                    </select>
-                  </fieldset>
-                </div>
-            </div>
-
-            <div class="col-md-3 col-12">
-                <div class="form-group">
-                    <label for="campaign-name-column">Created By</label>
-                    <input type="text" id="campaign-name-column" class="form-control toggleInputAccess"
-                        placeholder="Campaign Name" name="fname-column" required disabled>
-                </div>
-            </div>
-
-            <div class="form-group mb-3">
-                <label for="comment" class="form-label">
-                Comment    
-                </label>
-                <textarea class="form-control toggleInputAccess" placeholder="If Any" id="comment"
-                    rows="2" disabled></textarea>
-            </div>
-        </div>
-
-           </form>
-        </div>
-    </div> -->
-
-    <!-- ############################################################################################################ -->
 
 
     <!-- ******************** This is popup window for campaign only links update ***************** -->
@@ -188,9 +66,9 @@
     <div class="popupOuter">
         <div class="popup">
             
-           <form action="" method="post" id="popupForm">
+           <form  id="popupForm">
             <div class="editDetails">
-                <p>Last Updated By : Raj Ingale</p>
+                <p>Last Updated By : <p id="UpdatedBy"></p></p>
             </div>
          <div class="row">
                                                 
@@ -198,7 +76,7 @@
             <div class="form-group">
                 <label for="campaign-name-column">Campaign Name</label>
                 <input type="text" id="campaign-name-column" class="form-control"
-                    placeholder="Campaign Name" name="fname-column" readonly>
+                    placeholder="Campaign Name" readonly>
             </div>
         </div>
 
@@ -207,7 +85,7 @@
         <div class="form-group">
             <label for="campaign-id-column">Campaign ID</label>
             <input type="number" id="campaign-id-column" class="form-control"
-                placeholder="Campaign ID" name="lname-column" readonly>
+                placeholder="Campaign ID" readonly>
         </div>
     </div>
 
@@ -216,8 +94,8 @@
       <div class="form-group">
           <label for="client-code-select">Client Code</label>
           <fieldset class="form-group">
-    <input type="number" min="0" id="client-code-select" class="form-control"
-                placeholder="Client Code" name="lname-column" readonly>
+    <input type="text" id="client-code-select" class="form-control"
+                placeholder="Client Code"  readonly>
           <!-- <select class="form-select" id="client-code-select" style="width: 210px;" readonly> -->
             <!-- <option value="cs">CS</option> -->
             <!-- <option value="survey">Survey</option> -->
@@ -234,8 +112,8 @@
         
         <!-- CS options -->
         <fieldset class="form-group csOptions">
-  <input type="number" min="0" id="category-select" class="form-control"
-              placeholder="category" name="lname-column" readonly>
+  <input type="text" id="category-select" class="form-control"
+              placeholder="category"  readonly>
 
     </div>
 </div>
@@ -244,8 +122,8 @@
       <label for="country-floating">Country</label>
       <fieldset class="form-group">
 
-<input type="number" min="0" id="country-select" class="form-control"
-          placeholder="country" name="lname-column" readonly>
+<input type="text" id="country-select" class="form-control"
+          placeholder="country"  readonly>
     </fieldset>
   </div>
 </div>
@@ -253,7 +131,7 @@
 <div class="col-md-3 col-12">
   <div class="form-group">
       <label for="campaign-name-column">Created By</label>
-      <input type="text" id="campaign-name-column" class="form-control"
+      <input type="text" id="created-by-column" class="form-control"
           placeholder="name" name="fname-column" readonly>
   </div>
 </div>
@@ -290,6 +168,22 @@
         </div>
 
            </form>
+<hr>
+           <h6 for="asset-link-data" class="form-label">
+            Existing Links 
+            </h6>     
+
+            <table class="table table-striped" id="asset-link-table">
+              <thead>
+                 <tr>
+                     <th>Asset Name</th>
+                     <th>EDM Link</th>
+                 </tr>
+             </thead>
+        
+                 
+             </tbody>
+         </table>
         </div>
     </div> 
 
@@ -299,10 +193,10 @@
     <div id="app">
         <div id="sidebar" class="active">
             <div class="sidebar-wrapper active">
-                <div class="sidebar-header">
-                    <div class="d-flex justify-content-between">
+              <div class="sidebar-header py-0">
+                <div class="d-flex justify-content-center">
                         <div class="logo">
-                            <a href="index.html"><img src="assets/images/logo/logo.png" alt="Logo" srcset=""></a>
+                            <a href="index.html"><img style="height: 100px;" src="https://png.pngtree.com/element_our/png/20180911/background-material-design-for-lorem-ipsum-logo-png_89715.jpg" alt="Logo" srcset=""></a>
                         </div>
                         <div class="toggler">
                             <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
@@ -373,34 +267,7 @@
                                         <th>Status</th>
                                     </tr>
                                 </thead>
-                             <!--   <tbody>
-                                    <tr>
-                                        <td>333545</td>
-                                        <td>333545-eg-example-abc-q2</td>
-                                        <td>EU</td>
-                                        <td>CS</td>
-                                        <td>TGIF</td>
-                                        <td>Raj</td>
-                                        <td>13-04-2023</td>
-                                        <td>
-                                            <span class="badge bg-success">Copleted</span>
-                                        </td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td>323232</td>
-                                        <td>323232-ab-example-xyz-q2</td>
-                                        <td>NON-EU</td>
-                                        <td>CS</td>
-                                        <td>TGIF</td>
-                                        <td>Raj</td>
-                                        <td>12-04-2023</td>
-                                        <td>
-                                            <span class="badge bg-warning">Pending</span>
-                                        </td>
-                                    </tr>
-                                    
-                                </tbody> -->
+                        
                             </table>
                         </div>
                     </div>
@@ -423,6 +290,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Dynatable/0.3.1/jquery.dynatable.min.js"></script>
     <script src="./assets/js/extensions/sweetalert2.js"></script>
     <script src="./assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
+
+    
         <script>
     
              $('#table1').on('mouseover', 'tbody tr', function () {
@@ -473,22 +342,46 @@ $('#cancelBtn').click(function(){
                 $(".toggleInputAccess").prop("disabled", true);
             })
 // ****************** below code is to perform action after clicking on table row ****************************
-
+        var row;
         $('#table1').on('click', 'tbody tr', function () {
-                const row = table.row(this).data();
-                console.log(row);
-
-            //fetch data via id code will be here
-
+                 row = table.row(this).data();
+                
             $('.popupOuter').css({'display':'flex'})
 
+            $("#updatedBy").html(row.Links_Updated_by);
+            $("#campaign-name-column").val(row.Campaign_Name);
+            $("#campaign-id-column").val(row.CID);
+            $("#client-code-select").val(row.Client_Code);
+            $("#category-select").val(row.Category);
+            $("#country-select").val(row.Country);
+            $("#created-by-column").val(row.EDM_Completed_By);
+            $("#comment").val(row.Comments);
+
+            // below code convet asset name and EDM links to array
+
+           let assetRow = row.Asset_Name.split('#$#@');
+           let linkRow = row.EDM_link.split('#$#@');
+
+           let finalList=[];
+           for (let i = 0; i < assetRow.length; i++) {
+            finalList.push({
+              'asset-name':assetRow[i],
+              'link':linkRow[i]
+          });
+           }
+            table = $('#asset-link-table').DataTable({
+          data:finalList,
+          columns: [
+               { data: 'asset-name' },
+               { data: 'link' },
+             ]
+           })
             })
-            
             
 // ***********************************************************************************
 
 // ********************* below code to convert table to JSON ****************
-
+var assetLinkJson;
 $(document).ready(function() {
                 var customCellWriter = function(column, record) {
                   var html = column.attributeWriter(record),
@@ -625,8 +518,9 @@ $(document).ready(function() {
                   var $rows = $('table#excelDataTable').find('tr:not(:hidden)');
                   var headers = [];
                   var data = [];
+                  
                   $($rows.shift()).find('th:not(:empty):not([data-attr-ignore])').each(function() {
-                    console.log('[' + $(this).text().toLowerCase() + ']');
+                    // console.log('[' + $(this).text().toLowerCase() + ']');
                     headers.push($(this).text().toLowerCase());
                   });
                   $rows.each(function() {
@@ -639,8 +533,8 @@ $(document).ready(function() {
                   });
                   var jsonString = JSON.stringify(data, null, 2);
                   $('textarea#jsonDataDump').val(jsonString);
-                  console.log(jsonString);
-                  var assetLinkJson=data;
+                  // console.log(jsonString);
+                   assetLinkJson=data;
                   assetLinkJson.forEach(element => {
                       delete Object.assign(element, {['title']: element['0'] })['0'];
                       delete Object.assign(element, {['link']: element['1'] })['1'];
@@ -680,7 +574,7 @@ $(document).ready(function() {
     </script>
     <script>
    
-
+   console.log(document.cookie)
 $("#success").click(function () {
     swal.fire({
         title: "Error",
@@ -708,7 +602,56 @@ $("#warning").click(function () {
 });
 
 </script>
-    </script>
+
+<script>
+  // **************************below code is for popup form submission********************
+
+  $(document).ready(function () {
+              $("#popupForm").submit(function (event) {
+                // event.preventDefault();
+              let assetString= row.Asset_Name;
+              let linkString = row.EDM_link;
+
+                assetLinkJson.forEach(element => {
+                  assetString+=`#$#@${element.title}`
+                  linkString+=`#$#@${element.link}`
+                });
+
+                var formData = {
+                  cname: $("#campaign-name-column").val(),
+                  cid: $("#campaign-id-column").val(),
+                  // category: $("#category-select").val(),
+                  // client_code: $("#client-code-select").val(),
+                  // country: $("#country-select").val(),
+                  asset_data: assetString,
+                  link_data: linkString,
+                  comment: $("#comment").val(),
+                };
+                console.log(formData)
+                                                                      
+                $.ajax({
+                  type: "POST",
+                  url: "",
+                  data: JSON.stringify(formData),
+                  dataType: "json",
+                  contentType: "application/json; charset=utf-8",
+                  encode: true,
+                }).done(function (data) {
+                  console.log(data);
+                  // $("#cancelBtn").click();
+                  swal.fire({
+                            title: "Data Added Successfully",
+                            text: data,
+                            icon: "success",
+                            confirmButtonText: "Ok",
+                        })
+                });
+                
+              });
+            });
+
+
+</script>
 
 </body>
 
