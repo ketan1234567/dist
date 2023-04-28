@@ -35,7 +35,8 @@
             padding: 10px 20px;
             border-radius: 10px;
             display: table;
-            margin-top: 30px;
+            margin: 10px;
+            position: relative;
           }
         .editDetails>p{
             display: inline-block;
@@ -43,7 +44,7 @@
         .editDetails{
             display: flex;
             justify-content: space-between;
-            margin: 5px auto 30px auto;
+            margin: 5px auto 0px auto;
         }
         .groupEle{
             display: flex;
@@ -55,6 +56,61 @@
         hr{
   border: 1px solid grey;
 }
+      #myTab{
+        position: relative;
+        right: 10px;
+        float: right;
+        cursor: pointer;
+      }
+      .nav-link{
+        padding: 5px 25px;
+      }
+      #asset-link-table_wrapper>.row{
+        /* justify-content: space-between; */
+        width: 100%;
+      }
+      #asset-link-table_filter{
+        float: right;
+      }
+    #asset-link-table_length>label{
+      display: inline-flex;
+    }
+      .closeBtn {
+  border-radius: 50%;
+  padding: 0.5em;
+  width: 30px;
+  height: 30px;
+  border: 2px solid red;
+  color: red;
+  position: absolute;
+  right: 8px;
+  top: 12px; 
+}
+
+.closeBtn::before {
+  content: " ";
+  position: absolute;
+  display: block;
+  background-color: red;
+  width: 2px;
+  left: 12px;
+  top: 5px;
+  bottom: 5px;
+  transform: rotate(45deg);
+}
+.closeBtn::after {
+  content: " ";
+  position: absolute;
+  display: block;
+  background-color: red;
+  height: 2px;
+  top:12px;
+  left: 5px;
+  right: 5px;
+  transform: rotate(45deg);
+}
+
+
     </style>
 </head>
 
@@ -65,8 +121,25 @@
 
     <div class="popupOuter">
         <div class="popup">
-            
-           <form  id="popupForm">
+
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="show-links-tab" data-bs-toggle="tab"
+                    role="tab" aria-controls="home" aria-selected="true">Show Links</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="add-links-tab" data-bs-toggle="tab"
+                    role="tab" aria-controls="profile" aria-selected="false">Add links</a>
+            </li>
+        
+        </ul>
+       
+        <button type="button" class="btn closeBtn" id="cancelBtn">
+        
+        </button>
+
+           <form  id="popupForm" style="display: none;">
             <div class="editDetails">
                 <p>Last Updated By : <p id="UpdatedBy"></p></p>
             </div>
@@ -168,8 +241,10 @@
         </div>
 
            </form>
-<hr>
-           <h6 for="asset-link-data" class="form-label">
+
+           <div id="linksTable">
+            
+           <h6 for="asset-link-data" class="form-label mb-4">
             Existing Links 
             </h6>     
 
@@ -184,7 +259,10 @@
                  
              </tbody>
          </table>
+         
         </div>
+        </div>
+
     </div> 
 
     <!-- ***************************************************************************************************** -->
@@ -299,6 +377,19 @@
             }).on('mouseout', 'tbody tr', function () {
                 $(this).css({"outline": "0px solid "})
             })
+            // below code is for popup nav************************************************************
+
+            $('#add-links-tab').click(function (e) { 
+              e.preventDefault();
+              $('#popupForm').css('display', 'block');
+              $('#linksTable').css('display', 'none');
+            });
+            $('#show-links-tab').click(function (e) { 
+              e.preventDefault();
+              $('#popupForm').css('display', 'none');
+              $('#linksTable').css('display', 'block ');
+            });
+            // *********************************************************************************
     
 //    ############### Below code is to Fetch and display table data #####################
 
@@ -327,7 +418,7 @@
                                 confirmButtonText: "Ok"
                             }).then(function (err) {
                                
-                                  window.location = "http://localhost/New%20folder%20(11)/dist/auth-login.html";
+                                  window.location = "http://localhost/frontend/dist/auth-login.html";
                                 
                             })
                           }
@@ -373,7 +464,15 @@ $('#cancelBtn').click(function(){
           data:finalList,
           columns: [
                { data: 'asset-name' },
-               { data: 'link' },
+               { 
+         data: "link",
+         "render": function(data, type, row, meta){
+            if(type === 'display'){
+                data = '<a target=blank href="' + data + '">' + data + '</a>';
+            }
+            return data;
+         }
+      } 
              ]
            })
             })
