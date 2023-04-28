@@ -78,10 +78,259 @@
         .autocom-box li:hover {
             background: #efefef;
         }
+        #filterLinksDiv{
+            display: none;
+        }
+
+        .popupOuter{
+            z-index: 50;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0,0,0,.5);
+            position: fixed;
+            display: flex;
+            justify-content: center;
+            display: none;
+            overflow: scroll;
+        }
+        .popup{
+            background: white;
+            width: 70%;
+            padding: 10px 20px;
+            border-radius: 10px;
+            display: table;
+            margin: 10px;
+            position: relative;
+          }
+        .editDetails>p{
+            display: inline-block;
+        }
+        .editDetails{
+            display: flex;
+            justify-content: space-between;
+            margin: 5px auto 0px auto;
+        }
+        .groupEle{
+            display: flex;
+            align-items: baseline;
+        }
+        #asset-link-table{
+          width: 100%;
+        }
+        hr{
+  border: 1px solid grey;
+}
+      #myTab{
+        position: relative;
+        right: 10px;
+        float: right;
+        cursor: pointer;
+      }
+      .nav-link{
+        padding: 5px 25px;
+      }
+      #asset-link-table_wrapper>.row{
+        /* justify-content: space-between; */
+        width: 100%;
+      }
+      #asset-link-table_filter{
+        float: right;
+      }
+    #asset-link-table_length>label{
+      display: inline-flex;
+    }
+      .closeBtn {
+  border-radius: 50%;
+  padding: 0.5em;
+  width: 30px;
+  height: 30px;
+  border: 2px solid red;
+  color: red;
+  position: absolute;
+  right: 8px;
+  top: 12px; 
+}
+
+.closeBtn::before {
+  content: " ";
+  position: absolute;
+  display: block;
+  background-color: red;
+  width: 2px;
+  left: 12px;
+  top: 5px;
+  bottom: 5px;
+  transform: rotate(45deg);
+}
+.closeBtn::after {
+  content: " ";
+  position: absolute;
+  display: block;
+  background-color: red;
+  height: 2px;
+  top:12px;
+  left: 5px;
+  right: 5px;
+  transform: rotate(45deg);
+}
+
+
     </style>
 </head>
 
 <body>
+
+    
+    <!-- ******************** This is popup window for campaign only links update ***************** -->
+
+    <div class="popupOuter">
+        <div class="popup">
+
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="show-links-tab" data-bs-toggle="tab"
+                    role="tab" aria-controls="home" aria-selected="true">Show Links</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="add-links-tab" data-bs-toggle="tab"
+                    role="tab" aria-controls="profile" aria-selected="false">Add links</a>
+            </li>
+        
+        </ul>
+       
+        <button type="button" class="btn closeBtn" id="cancelBtn">
+        
+        </button>
+
+           <form  id="popupForm" style="display: none;">
+            <div class="editDetails">
+                <p>Last Updated By : <p id="UpdatedBy"></p></p>
+            </div>
+         <div class="row">
+                                                
+          <div class="col-md-6 col-12">
+            <div class="form-group">
+                <label for="campaign-name-column">Campaign Name</label>
+                <input type="text" id="campaign-name-column" class="form-control"
+                    placeholder="Campaign Name" readonly>
+            </div>
+        </div>
+
+
+    <div class="col-md-6 col-12">
+        <div class="form-group">
+            <label for="campaign-id-column">Campaign ID</label>
+            <input type="number" id="campaign-id-column" class="form-control"
+                placeholder="Campaign ID" readonly>
+        </div>
+    </div>
+
+    
+    <div class="col-md-3 col-12">
+      <div class="form-group">
+          <label for="client-code-select">Client Code</label>
+          <fieldset class="form-group">
+    <input type="text" id="client-code-select" class="form-control"
+                placeholder="Client Code"  readonly>
+          <!-- <select class="form-select" id="client-code-select" style="width: 210px;" readonly> -->
+            <!-- <option value="cs">CS</option> -->
+            <!-- <option value="survey">Survey</option> -->
+            <!-- <option value="eblast">eblast</option> -->
+        <!-- </select> -->
+      </fieldset>
+      </div>
+  </div>
+
+  <div class="col-md-3 col-12">
+    <div class="form-group">
+        <label for="category-select">Category</label>
+
+        
+        <!-- CS options -->
+        <fieldset class="form-group csOptions">
+  <input type="text" id="category-select" class="form-control"
+              placeholder="category"  readonly>
+
+    </div>
+</div>
+<div class="col-md-3 col-12">
+  <div class="form-group">
+      <label for="country-floating">Country</label>
+      <fieldset class="form-group">
+
+<input type="text" id="country-select" class="form-control"
+          placeholder="country"  readonly>
+    </fieldset>
+  </div>
+</div>
+
+<div class="col-md-3 col-12">
+  <div class="form-group">
+      <label for="campaign-name-column">Created By</label>
+      <input type="text" id="created-by-column" class="form-control"
+          placeholder="name" name="fname-column" readonly>
+  </div>
+</div>
+
+
+            <div class="form-group mb-3">
+                <h6 for="comment" class="form-label">
+                Comment    
+                </h6>
+                <textarea class="form-control" placeholder="If Any" id="comment"
+                    rows="2"></textarea>
+            </div>
+
+            <div class="form-group mb-3">
+                <h6 for="asset-link-data" class="form-label">
+                Add Links   
+                </h6>
+                <textarea placeholder="Paste Excel Table Here" class="form-control" id="asset-link-data"
+                    rows="5" required></textarea>
+            </div>
+
+            <div class="col-12 d-flex justify-content-end">
+                <button type="submit"
+                    class="btn btn-primary me-1 mb-1" id="editBtn">Add Links</button>
+                <button type="button"
+                    class="btn btn-light-secondary me-1 mb-1" id="cancelBtn">Cancel</button>
+            </div>
+
+            <!-- To Show Asset name and links in table form, if want remove style-->
+            <div id="output"  style="height: 0px; overflow: hidden;"  >
+                <table id="excelDataTable"></table>
+              </div>
+              <!-- ******************************* -->
+        </div>
+
+           </form>
+
+           <div id="linksTable">
+            
+           <h6 for="asset-link-data" class="form-label mb-4">
+            Existing Links 
+            </h6>     
+
+            <table class="table table-striped" id="asset-link-table">
+              <thead>
+                 <tr>
+                     <th>Asset Name</th>
+                     <th>EDM Link</th>
+                 </tr>
+             </thead>
+        
+                 
+             </tbody>
+         </table>
+         
+        </div>
+        </div>
+
+    </div> 
+
+    <!-- ***************************************************************************************************** -->
+
     <div id="app">
         <div id="sidebar" class="active">
             <div class="sidebar-wrapper active">
@@ -139,13 +388,17 @@
             <div class="page-content">
                 <div class="row" style="justify-content: space-between;">
                     <div class=" col-lg-3 col-md-6">
-                        <div class="card" style="padding: 10px 30px;">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h5 class="font-semibold text-muted">Total Campaigns</h5>
-                                    <h5 class="font-extrabold mb-0" id="campTotal" style="text-align: center;">1000</h5>
+                        <div class="card" style="padding: 12px 10px; text-align: center;">
+                            
+                                <div class=" row" style="justify-content: space-between;">
+                                    <h6 class="font-semibold text-muted" style="width: auto;">Overall Campaigns :</h6>
+                                    <h6 class="font-extrabold mb-0" id="campTotal" style="width: auto;">100</h6>
                                 </div>
-                            </div>
+                                <div class=" row" style=" justify-content: space-between;">
+                                    <h6 class="font-semibold text-muted" style="width: auto;">Overall Links :</h6>
+                                    <h6 class="font-extrabold mb-0" id="overallLinksTotal" style="width: auto;" >1000</h6>
+                                </div>
+                            
                         </div>
                     </div>
                     <div class=" col-lg-6 col-md-6">
@@ -164,8 +417,8 @@
                         <div class="card" style="padding: 14px 30px; text-align: center;">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <h5 class="font-semibold text-muted">Raj Ingale</h5>
-                                    <h6 class="font-extrabold mb-0" id="campTotal" style="text-align: center;">105197</h6>
+                                    <h5 class="font-semibold text-muted" id="userName"></h5>
+                                    <h6 class="font-extrabold mb-0" id="userId" style="text-align: center;"></h6>
                                 </div>
                             </div>
                         </div>
@@ -252,17 +505,17 @@
 
                             <div class=" " style="text-align: center; ">
                                 <div class="form-group">
-                                    <button class="btn btn-success mt-2 " type="button">Get Total</button>
+                                    <button class="btn btn-success mt-2 mb-4" type="button">Get Total</button>
                                 </div>
                             </div>
 
-                            <div class="mt-4">
+                            <div  id='filterLinksDiv'>
                                 <div class="card" style="text-align: center;">
                                     <div class="row mb-3"
                                         style="padding: 6px; border: 2px solid #c4cad3; border-radius: 10px;">
                                         <div>
                                             <h6 class="font-semibold text-muted">Total Links</h6>
-                                            <h5 class="font-extrabold mb-0" id="campTotal">5000</h5>
+                                            <h5 class="font-extrabold mb-0" id="filterLinksTotal">5000</h5>
                                         </div>
                                     </div>
                                 </div>
@@ -297,16 +550,24 @@
 
     <script src="assets/js/main.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.1/js/jquery.dataTables.min.js"></script>
+    <script  src="https://cdn.datatables.net/1.11.1/js/dataTables.bootstrap5.min.js"></script>
+        <!-- this is dependency required to convert excel data to json -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Dynatable/0.3.1/jquery.dynatable.min.js"></script>
 
     <script>
+        let userDetails = atob(document.cookie.split('.')[1]);
+         userDetails = JSON.parse(userDetails)
+        $('#userName').html(userDetails.firstname);
+        $('#userId').html(userDetails.username);
         // ************************** below code change category acording to client code **********************
 
         $("#client-code-select").change(function () {
-            if ($(this).val() == 'survey') {
+            if ($(this).val() == 'Survey') {
                 $(".csOptions").css("display", "none");
                 $(".eblastOptions").css("display", "none");
                 $(".surveyOptions").css("display", "inline-block");
-            } else if ($(this).val() == 'cs') {
+            } else if ($(this).val() == 'CS') {
                 $(".csOptions").css("display", "inline-block");
                 $(".surveyOptions").css("display", "none");
                 $(".eblastOptions").css("display", "none");
@@ -371,7 +632,7 @@ $('.searchBoxOuter').focusout(function(){
                 for (let i = 0; i < suggestLength; i++) {
                     if (emptyArray[i] != null) {
 
-                        finalSuggestlist += `<li>${emptyArray[i]}</li>`;
+                        finalSuggestlist += `<li onclick='searchListClickFun(${emptyArray[i]})'>${emptyArray[i]}</li>`;
 
                     }
                 }
@@ -386,14 +647,31 @@ $('.searchBoxOuter').focusout(function(){
             }
 
         });
+ // ***************************below code id to get overall total links and camps**********************
+            let userdata={
+                userid: userDetails.username
+            }
 
-        // ***************************below code id to get total links**********************
+            $.ajax({
+                      type: "POST",
+                      url: "",
+                      data: userdata,
+                      dataType: "json",
+                      contentType: "application/json; charset=utf-8",
+                      encode: true,
+                    }).done(function (data) {
+                      $(' #filterLinksDiv').css('dsiplay', 'block');
+                     $('#filterTotalLinks').html(data);
+                    });
+    
+        // ***************************below code id to get filter total links**********************
         $('#totalLinkForm').submit(function (e) { 
             e.preventDefault();
             let totalLinkData={
                 client_code: $('#client-code-select').val(),
                 category:$('#category-select').val(),
-                country:$('#country-select').val()
+                country:$('#country-select').val(),
+                userid: userDetails.username
             }
 
             $.ajax({
@@ -404,8 +682,8 @@ $('.searchBoxOuter').focusout(function(){
                       contentType: "application/json; charset=utf-8",
                       encode: true,
                     }).done(function (data) {
-                      
-                     $('#campTotal').html(data);
+                      $(' #filterLinksDiv').css('dsiplay', 'block');
+                     $('#filterTotalLinks').html(data);
                     });
         });
     </script>
@@ -450,6 +728,282 @@ $('.searchBoxOuter').focusout(function(){
 
         var area = new ApexCharts(document.querySelector("#area"), areaOptions);
         area.render();
+    </script>
+
+    <script>
+         // below code is for popup nav************************************************************
+
+         $('#add-links-tab').click(function (e) { 
+              e.preventDefault();
+              $('#popupForm').css('display', 'block');
+              $('#linksTable').css('display', 'none');
+            });
+            $('#show-links-tab').click(function (e) { 
+              e.preventDefault();
+              $('#popupForm').css('display', 'none');
+              $('#linksTable').css('display', 'block ');
+            });
+            // *********************************************************************************
+    // #########################################################################
+$('#cancelBtn').click(function(){
+                $('.popupOuter').css({'display':'none'})
+                $(".toggleInputAccess").prop("disabled", true);
+            })
+
+            // ****************** below code is to perform action after clicking on table row ****************************
+        var row;
+       function  searchListClickFun(data){
+                 row = data;        
+            $('.popupOuter').css({'display':'flex'})
+
+            $("#updatedBy").html(row.Links_Updated_by);
+            $("#campaign-name-column").val(row.Campaign_Name);
+            $("#campaign-id-column").val(row.CID);
+            $("#client-code-select").val(row.Client_Code);
+            $("#category-select").val(row.Category);
+            $("#country-select").val(row.Country);
+            $("#created-by-column").val(row.EDM_Completed_By);
+            $("#comment").val(row.Comments);
+
+            // below code convet asset name and EDM links to array
+
+           let assetRow = row.Asset_Name.split('#$#@');
+           let linkRow = row.EDM_link.split('#$#@');
+
+           let finalList=[];
+           for (let i = 0; i < assetRow.length; i++) {
+            finalList.push({
+              'asset-name':assetRow[i],
+              'link':linkRow[i]
+          });
+           }
+            table = $('#asset-link-table').DataTable({
+          data:finalList,
+          columns: [
+               { data: 'asset-name' },
+               { 
+         data: "link",
+         "render": function(data, type, row, meta){
+            if(type === 'display'){
+                data = '<a target=blank href="' + data + '">' + data + '</a>';
+            }
+            return data;
+         }
+      } 
+             ]
+           })
+        }
+            
+// ***********************************************************************************
+
+// ********************* below code to convert table to JSON ****************
+var assetLinkJson;
+$(document).ready(function() {
+                var customCellWriter = function(column, record) {
+                  var html = column.attributeWriter(record),
+                    td = '<td';
+                  if (column.hidden || column.textAlign) {
+                    td += ' style="';
+                    if (column.hidden) {
+                      td += 'display: none;';
+                    }
+                    if (column.textAlign) {
+                      td += 'text-align: ' + column.textAlign + ';';
+                    }
+                    td += '"';
+                  }
+                  return td + '><div>' + html + '<\/td>';
+                };
+                var makeElementEditable = function(element) {
+                  $('div', element).attr('contenteditable', true);
+                  $(element).focusout(function() {
+                    $('div', element).attr('contenteditable', false);
+                  });
+                  $(element).keydown(function(e) {
+                    if (e.which == 13) {
+                      e.preventDefault();
+                      $('div', element).attr('contenteditable', false);
+                      $(document).focus();
+                    }
+                  });
+                  $('div', element).on('paste', function(e) {
+                    e.preventDefault();
+                  });
+                };
+               
+                $(document).on('paste', 'textarea#asset-link-data', function(e) {
+                //   e.preventDefault();
+                  var cb;
+                  var clipText = '';
+                  if (window.clipboardData && window.clipboardData.getData) {
+                    cb = window.clipboardData;
+                    clipText = cb.getData('Text');
+                  } else if (e.clipboardData && e.clipboardData.getData) {
+                    cb = e.clipboardData;
+                    clipText = cb.getData('text/plain');
+                  } else {
+                    cb = e.originalEvent.clipboardData;
+                    clipText = cb.getData('text/plain');
+                  }
+                  var clipRows = clipText.split('\n');
+                  for (i = 0; i < clipRows.length; i++) {
+                    clipRows[i] = clipRows[i].split('\t');
+                  }
+                  var jsonObj = [];
+                  for (i = 0; i < clipRows.length - 1; i++) {
+                    var item = {};
+                    for (j = 0; j < clipRows[i].length; j++) {
+                      if (clipRows[i][j] != '\r') {
+                        if (clipRows[i][j].length !== 0) {
+                          item[j] = clipRows[i][j];
+                        }
+                      }
+                    }
+                    jsonObj.push(item);
+                  }
+                  $('textarea#jsonDataDump').val('');
+                  var tablePlaceHolder = document.getElementById('output');
+                  tablePlaceHolder.innerHTML = '';
+                  var table = document.createElement('table');
+                  table.id = 'excelDataTable';
+                  table.className = 'table';
+                  var header = table.createTHead();
+                  var row = header.insertRow(0);
+                  var keys = [];
+                  for (var i = 0; i < jsonObj.length; i++) {
+                    var obj = jsonObj[i];
+                    for (var j in obj) {
+                      if ($.inArray(j, keys) == -1) {
+                        keys.push(j);
+                      }
+                    }
+                  }
+                  keys.forEach(function(value, index) {
+                    var headerCell = document.createElement('th');
+                    headerCell.innerHTML = '<div>' + value + '<\/div>';
+                    $(headerCell).click(function() {
+                      makeElementEditable(this);
+                    });
+                    $(headerCell).keyup(function(e) {
+                      var ignoredClass = 'ignored';
+                      var ignoredAttr = 'data-attr-ignore';
+                      var columnCells = $('td, th', table).filter(':nth-child(' + ($(this).index() + 1) + ')');
+                      $(this).removeAttr(ignoredAttr);
+                      $(columnCells).each(function() {
+                        $(this).removeClass(ignoredClass);
+                        $(this).removeAttr(ignoredAttr);
+                      });
+                      if ($(this).is(':empty') || $(this).text().trim() === '') {
+                        $(this).attr(ignoredAttr, '');
+                        $(columnCells).each(function() {
+                          $(this).addClass(ignoredClass);
+                          $(this).attr(ignoredAttr, '');
+                        });
+                      }
+                    });
+                    var cell = row.insertCell(index);
+                    cell.parentNode.insertBefore(headerCell, cell);
+                    cell.parentNode.removeChild(cell);
+                  });
+                  tablePlaceHolder.appendChild(table);
+                  var excelDynaTable = $('table#excelDataTable').dynatable({
+                    features: {
+                      paginate: false,
+                      search: false,
+                      recordCount: true,
+                      sort: false
+                    },
+                    dataset: {
+                      records: jsonObj
+                    },
+                    writers: {
+                      _cellWriter: customCellWriter
+                    }
+                  });
+
+                  // below code convert table to json automatically after pasting*******************************
+                  var $rows = $('table#excelDataTable').find('tr:not(:hidden)');
+                  var headers = [];
+                  var data = [];
+                  
+                  $($rows.shift()).find('th:not(:empty):not([data-attr-ignore])').each(function() {
+                    // console.log('[' + $(this).text().toLowerCase() + ']');
+                    headers.push($(this).text().toLowerCase());
+                  });
+                  $rows.each(function() {
+                    var $td = $(this).find('td:not([data-attr-ignore])');
+                    var h = {};
+                    headers.forEach(function(header, i) {
+                      h[header] = $td.eq(i).text();
+                    });
+                    data.push(h);
+                  });
+                  var jsonString = JSON.stringify(data, null, 2);
+                  $('textarea#jsonDataDump').val(jsonString);
+                  // console.log(jsonString);
+                   assetLinkJson=data;
+                  assetLinkJson.forEach(element => {
+                      delete Object.assign(element, {['title']: element['0'] })['0'];
+                      delete Object.assign(element, {['link']: element['1'] })['1'];
+                    });
+                  // ***************************************************************
+
+                  $(document).on('click', 'table#excelDataTable td', function() {
+                    makeElementEditable(this);
+                  });
+                });
+                jQuery.fn.pop = [].pop;
+                jQuery.fn.shift = [].shift;
+
+                
+              });
+
+              // **************************below code is for popup form submission********************
+
+  $(document).ready(function () {
+              $("#popupForm").submit(function (event) {
+                // event.preventDefault();
+              let assetString= row.Asset_Name;
+              let linkString = row.EDM_link;
+
+                assetLinkJson.forEach(element => {
+                  assetString+=`#$#@${element.title}`
+                  linkString+=`#$#@${element.link}`
+                });
+
+                var formData = {
+                  cname: $("#campaign-name-column").val(),
+                  cid: $("#campaign-id-column").val(),
+                  // category: $("#category-select").val(),
+                  // client_code: $("#client-code-select").val(),
+                  // country: $("#country-select").val(),
+                  asset_data: assetString,
+                  link_data: linkString,
+                  comment: $("#comment").val(),
+                };
+                console.log(formData)
+                                                                      
+                $.ajax({
+                  type: "POST",
+                  url: "",
+                  data: JSON.stringify(formData),
+                  dataType: "json",
+                  contentType: "application/json; charset=utf-8",
+                  encode: true,
+                }).done(function (data) {
+                  console.log(data);
+                  // $("#cancelBtn").click();
+                  swal.fire({
+                            title: "Data Added Successfully",
+                            text: data,
+                            icon: "success",
+                            confirmButtonText: "Ok",
+                        })
+                });
+                
+              });
+            });
+
     </script>
 </body>
 

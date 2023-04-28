@@ -170,7 +170,6 @@
                                                     </div>
                                                 </div>
 
-                                         
                                                 <!-- <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label for="company-column">Company</label>
@@ -247,14 +246,17 @@
     <script src="./assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
   <script>
 
+  let userDetails = atob(document.cookie.split('.')[1]);
+         userDetails = JSON.parse(userDetails);
+    
     // ************************** below code change category acording to client code **********************
     
     $("#client-code-select").change(function(){
-      if ($(this).val()=='survey') {
+      if ($(this).val()=='Survey') {
         $(".csOptions").css("display", "none");
         $(".eblastOptions").css("display", "none");                                         
         $(".surveyOptions").css("display", "inline-block");
-      }else if($(this).val()=='cs'){
+      }else if($(this).val()=='CS'){
         $(".csOptions").css("display", "inline-block");
         $(".surveyOptions").css("display", "none");     
         $(".eblastOptions").css("display", "none");                                                                             
@@ -468,15 +470,18 @@ $(document).ready(function() {
               // *************************** After Submit function *************************************
                   $(document).ready(function () {
                   $("form").submit(function (event) {
- 
+                      let cnameAddDash = $("#campaign-name-column").val();
+                      cnameAddDash = cnameAddDash.replaceAll(' ', '-');
                     var formData = {
-                      cname: $("#campaign-name-column").val(),
+                      cname: cnameAddDash,
                       cid: $("#campaign-id-column").val(),
                       category: $("#category-select").val(),
                       client_code: $("#client-code-select").val(),
                       country: $("#country-select").val(),
                       asset_link_data: assetLinkJson,
                       comment: $("#comment").val(),
+                      username:userDetails.firstname,
+                      userid:userDetails.username
                     };
                     console.log(formData)
                                                                           
