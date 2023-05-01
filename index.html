@@ -211,8 +211,8 @@
                                                 
           <div class="col-md-6 col-12">
             <div class="form-group">
-                <label for="campaign-name-column">Campaign Name</label>
-                <input type="text" id="campaign-name-column" class="form-control"
+                <label for="campaign-name">Campaign Name</label>
+                <input type="text" id="campaign-name" class="form-control"
                     placeholder="Campaign Name" readonly>
             </div>
         </div>
@@ -220,8 +220,8 @@
 
     <div class="col-md-6 col-12">
         <div class="form-group">
-            <label for="campaign-id-column">Campaign ID</label>
-            <input type="number" id="campaign-id-column" class="form-control"
+            <label for="campaign-id">Campaign ID</label>
+            <input type="number" id="campaign-id" class="form-control"
                 placeholder="Campaign ID" readonly>
         </div>
     </div>
@@ -229,9 +229,9 @@
     
     <div class="col-md-3 col-12">
       <div class="form-group">
-          <label for="client-code-select">Client Code</label>
+          <label for="client-code">Client Code</label>
           <fieldset class="form-group">
-    <input type="text" id="client-code-select" class="form-control"
+    <input type="text" id="client-code" class="form-control"
                 placeholder="Client Code"  readonly>
           <!-- <select class="form-select" id="client-code-select" style="width: 210px;" readonly> -->
             <!-- <option value="cs">CS</option> -->
@@ -244,22 +244,22 @@
 
   <div class="col-md-3 col-12">
     <div class="form-group">
-        <label for="category-select">Category</label>
+        <label for="category">Category</label>
 
         
         <!-- CS options -->
         <fieldset class="form-group csOptions">
-  <input type="text" id="category-select" class="form-control"
+  <input type="text" id="category" class="form-control"
               placeholder="category"  readonly>
 
     </div>
 </div>
 <div class="col-md-3 col-12">
   <div class="form-group">
-      <label for="country-floating">Country</label>
+      <label for="country">Country</label>
       <fieldset class="form-group">
 
-<input type="text" id="country-select" class="form-control"
+<input type="text" id="country" class="form-control"
           placeholder="country"  readonly>
     </fieldset>
   </div>
@@ -268,7 +268,7 @@
 <div class="col-md-3 col-12">
   <div class="form-group">
       <label for="campaign-name-column">Created By</label>
-      <input type="text" id="created-by-column" class="form-control"
+      <input type="text" id="created-by" class="form-control"
           placeholder="name" name="fname-column" readonly>
   </div>
 </div>
@@ -505,7 +505,7 @@
 
                             <div class=" " style="text-align: center; ">
                                 <div class="form-group">
-                                    <button class="btn btn-success mt-2 mb-4" type="button">Get Total</button>
+                                    <button class="btn btn-success mt-2 mb-4" type="submit">Get Total</button>
                                 </div>
                             </div>
 
@@ -563,6 +563,7 @@
         // ************************** below code change category acording to client code **********************
 
         $("#client-code-select").change(function () {
+          console.log('dfhf')
             if ($(this).val() == 'Survey') {
                 $(".csOptions").css("display", "none");
                 $(".eblastOptions").css("display", "none");
@@ -665,8 +666,9 @@ $('.searchBoxOuter').focusout(function(){
                     });
     
         // ***************************below code id to get filter total links**********************
-        $('#totalLinkForm').submit(function (e) { 
-            e.preventDefault();
+        $('#totalLinkForm').submit(function (e) {  
+
+          e.preventDefault();
             let totalLinkData={
                 client_code: $('#client-code-select').val(),
                 category:$('#category-select').val(),
@@ -977,9 +979,10 @@ $(document).ready(function() {
                   // category: $("#category-select").val(),
                   // client_code: $("#client-code-select").val(),
                   // country: $("#country-select").val(),
-                  asset_data: assetString,
-                  link_data: linkString,
+                  asset_data: assetString.replaceAll('"', ''),
+                  link_data: linkString.replaceAll('"', ''),
                   comment: $("#comment").val(),
+                  userid : userDetails.firstname
                 };
                 console.log(formData)
                                                                       

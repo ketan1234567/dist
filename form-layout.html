@@ -293,22 +293,22 @@ $(document).ready(function() {
                   }
                   return td + '><div>' + html + '<\/td>';
                 };
-                var makeElementEditable = function(element) {
-                  $('div', element).attr('contenteditable', true);
-                  $(element).focusout(function() {
-                    $('div', element).attr('contenteditable', false);
-                  });
-                  $(element).keydown(function(e) {
-                    if (e.which == 13) {
-                      e.preventDefault();
-                      $('div', element).attr('contenteditable', false);
-                      $(document).focus();
-                    }
-                  });
-                  $('div', element).on('paste', function(e) {
-                    e.preventDefault();
-                  });
-                };
+                // var makeElementEditable = function(element) {
+                //   $('div', element).attr('contenteditable', true);
+                //   $(element).focusout(function() {
+                //     $('div', element).attr('contenteditable', false);
+                //   });
+                //   $(element).keydown(function(e) {
+                //     if (e.which == 13) {
+                //       e.preventDefault();
+                //       $('div', element).attr('contenteditable', false);
+                //       $(document).focus();
+                //     }
+                //   });
+                //   $('div', element).on('paste', function(e) {
+                //     e.preventDefault();
+                //   });
+                // };
                 // $(document).on('keypress', 'textarea#jsonDataDump', function(e) {
                 //   e.preventDefault();
                 //   e.stopPropagation();
@@ -472,6 +472,7 @@ $(document).ready(function() {
                   $("form").submit(function (event) {
                       let cnameAddDash = $("#campaign-name-column").val();
                       cnameAddDash = cnameAddDash.replaceAll(' ', '-');
+                      console.log()
                     var formData = {
                       cname: cnameAddDash,
                       cid: $("#campaign-id-column").val(),
