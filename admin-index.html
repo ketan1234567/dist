@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -171,7 +172,58 @@
   right: 5px;
   transform: rotate(45deg);
 }
+#usersTable1{
+    border-collapse:separate; 
+  border-spacing: 0 5px;
+  border-radius:6px;
+}
 
+th:first-of-type {
+  border-top-left-radius: 10px;
+}
+th:last-of-type {
+  border-top-right-radius: 10px;
+}
+tr:last-of-type td:first-of-type {
+  border-bottom-left-radius: 10px;
+}
+tr:last-of-type td:last-of-type {
+  border-bottom-right-radius: 10px;
+}
+#usersTable1>tbody>tr{
+    background-color: white;
+}
+#usersTable1>tbody>tr>td{
+    padding: 4px 18px;
+}
+#usersTable1>thead>tr>th{
+    padding: 4px 18px;
+    background-color: white;
+
+}
+#usersTable1>tbody>tr:nth-child(even) {
+            background-color: rgb(229, 235, 229);
+        }
+
+        #usersTable2{
+    border-collapse:separate; 
+  border-spacing: 0 5px;
+  border-radius:6px;
+}
+#usersTable2>tbody>tr{
+    background-color: white;
+}
+#usersTable2>tbody>tr>td{
+    padding: 4px 18px;
+}
+#usersTable2>thead>tr>th{
+    padding: 4px 18px;
+    background-color: white;
+
+}
+#usersTable2>tbody>tr:nth-child(even) {
+            background-color: rgb(229, 235, 229);
+        }
 
     </style>
 </head>
@@ -370,6 +422,7 @@
                             </a>
                         </li>
 
+                        
 
                     </ul>
                 </div>
@@ -389,14 +442,14 @@
             <div class="page-content">
                 <div class="row" style="justify-content: space-between;">
                     <div class=" col-lg-3 col-md-6">
-                        <div class="card" style="padding: 12px 10px; text-align: center;">
+                        <div class="card" style="padding: 12px 10px 3px 10px; text-align: center;">
                             
                                 <div class=" row" style="justify-content: space-between;">
                                     <h6 class="font-semibold text-muted" style="width: auto;">Overall Campaigns :</h6>
                                     <h6 class="font-extrabold mb-0" id="campTotal" style="width: auto;"></h6>
                                 </div>
                                 <div class=" row" style=" justify-content: space-between;">
-                                    <h6 class="font-semibold text-muted" style="width: auto;">Overall Links :</h6>
+                                    <h6 class="font-semibold text-muted" style="width: auto; ">Overall Links :</h6>
                                     <h6 class="font-extrabold mb-0" id="overallLinksTotal" style="width: auto;" ></h6>
                                 </div>
                             
@@ -404,8 +457,8 @@
                     </div>
                     <div class=" col-lg-6 col-md-6">
                         <div class="card searchBoxOuter">
-                            <h5 class="font-extrabold mb-2 mt-1" id="search" style="text-align: center;">Search</h5>
-                            <input placeholder="Type here..." type="search" name="" id="dashSearch">
+                            <h6 class="font-extrabold mb-2 mt-1" id="search" style="text-align: center;">Search</h6>
+                            <input placeholder="Type here..." type="search" name="" style="height: 33px;" id="dashSearch">
                             <div class="autocom-box">
                                 <!-- here list are inserted from javascript -->
                               
@@ -415,7 +468,7 @@
                     </div>
 
                     <div class=" col-lg-3 col-md-6">
-                        <div class="card" style="padding: 14px 30px; text-align: center;">
+                        <div class="card" style="padding: 9px 30px; text-align: center;">
                             <div class="row">
                                 <div class="col-md-12">
                                     <h5 class="font-semibold text-muted" id="userName"></h5>
@@ -428,112 +481,80 @@
 
 
 
-                <div class="row" >
-                    <form class="form" id="totalLinkForm" style="display: inline-block; width: auto;" >
-
-                        <div class="column"
-                            style="background: #ffffff; padding: 25px 25px 0px 25px; border-radius: 10px;">
-                            <div class="  ">
-                                <div class="form-group">
-                                    <label for="client-code-select">Client Code</label>
-                                    <fieldset class="form-group">
-                                        <select class="form-select" id="client-code-select" style="width: 180px;">
-                                            <option value="CS">CS</option>
-                                            <option value="Survey">Survey</option>
-                                            <option value="eBlast">eBlast</option>
-                                        </select>
-                                    </fieldset>
-                                </div>
-                            </div>
-
-                            <div class=" " style="display: table-caption;">
-                                <div class="form-group">
-                                    <label for="category-select">Category</label>
-
-
-                                    <!-- CS options -->
-                                    <fieldset class="form-group csOptions">
-                                        <select class="form-select" id="category-select" style="width: 180px;">
-                                            <option value="TGIF (email marketing)">TGIF</option>
-                                            <option value="ACE">ACE</option>
-                                            <option value="VIBE">VIBE</option>
-                                            <option value="IP">IP</option>
-                                            <option value="TAJ (ARC)">TAJ (ARC)</option>
-                                            <option value="RAY (INSTA)">RAY (INSTA)</option>
-                                            <option value="MTH">MTH</option>
-                                            <option value="Magento">Magento</option>
-                                            <option value="W8 (CS)">W8 (CS)</option>
-                                        </select>
-                                    </fieldset>
-
-                                    <!-- Survey options -->
-                                    <fieldset class="form-group surveyOptions" style="display: none;">
-                                        <select class="form-select" id="category-select" style="width: 180px;">
-                                            <option value="PKT">PKT</option>
-                                            <option value="API">API</option>
-                                            <option value="W8-RB">W8-RB</option>
-                                            <option value="W8-LE">W8-LE</option>
-                                            <option value="W8-LA">W8-LA</option>
-                                            <option value="W8-Techscore">W8-Techscore</option>
-                                            <option value="ITBP-Techscore">ITBP-Techscore</option>
-                                            <option value="MTH API">MTH API</option>
-                                            <option value="ITBP PKT (.NET)">ITBP PKT (.NET)</option>
-                                            <option value="Email ijp">Email IJP</option>
-                                        </select>
-                                    </fieldset>
-
-                                    <!-- E Blast options -->
-                                    <fieldset class="form-group eblastOptions" style="display: none;">
-                                        <select class="form-select" id="category-select" style="width: 180px;">
-                                            <option value="ACE eblast">ACE eblast</option>
-                                            <option value="W8 eblast">W8 eblast</option>
-                                        </select>
-                                    </fieldset>
-                                </div>
-                            </div>
-
-                            <div class=" ">
-                                <div class="form-group">
-                                    <label for="country-floating">Country</label>
-                                    <fieldset class="form-group">
-                                        <select class="form-select" id="country-select" style="width: 180px;">
-                                            <option value="EU">EU</option>
-                                            <option value="NON-EU">NON-EU</option>
-                                        </select>
-                                    </fieldset>
-                                </div>
-                            </div>
-
-                            <div class=" " style="text-align: center; ">
-                                <div class="form-group">
-                                    <button class="btn btn-success mt-2 mb-2" type="submit">Get Total</button>
-                                </div>
-                            </div>
-
-                            <div  id='filterLinksDiv'>
-                                <div class="card" style="text-align: center;">
-                                    <div class="row mb-3"
-                                        style="padding: 6px; border: 2px solid #c4cad3; border-radius: 10px;">
-                                        <div>
-                                            <h6 class="font-semibold text-muted">Total Links</h6>
-                                            <h5 class="font-extrabold mb-0" id="filterLinksTotal"></h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-
-                    <div class="col-md-8" style="width:74.5%" > 
-                        <div class="card">
-                            <div class="card-header" style="padding: 10px 0px 0px 30px; margin-bottom: -10px;">
-                                <h4 id="chartHead"></h4>
-                            </div>
-                            <div class="card-body" style="padding-bottom: 0px;">
-                                <div id="area"></div>
-                            </div>
-                        </div>
+                <div class="row" style="margin-top: -10px;">
+                    <div style="position: relative; display: inline-block; max-width: 500px;" >
+                    <div style="background-color: white; display: flex;justify-content: space-evenly; position: absolute;width: 90%; height: 25px; z-index: 10; top: 20px; ">
+                        
+                        <p>From</p>
+                        <input style="color: #607080;" type="date" name="" id="fromDate">
+                   
+                 
+                        <p>To</p>
+                        <input style="color: #607080;" type="date" name="" id="toDate">
+                        <button class="btn btn-success" id="dateBtn" style="padding: 3px 5px 5px 5px;" > <i class="bi bi-search"></i> </button>
+                       
+                            <span  id="boot-icon" data-bs-toggle="dropdown" onMouseOver="this.style.background='#d5d9d5'" onMouseOut="this.style.background='#FFFF'" style="cursor: pointer;height: auto;padding-top: 3px; border-radius: 40%; text-align: center;"><i class="bi bi-three-dots-vertical"></i></span>
+                          <ul class="dropdown-menu" style="min-width: 170px;">
+                            <li style="background-color: #E5EBE5;"><a class="dropdown-item" id="tableToExcelBtn" href="#">Download Excel</a></li>
+                          </ul>
                     </div>
+                    <table id="usersTable1">
+                        <thead style="position: relative; padding-top: 30px;">
+                           
+                            <tr>
+                                <th style="padding-top: 60px;">
+                                    User Name
+                                </th>
+                                <th style="padding-top: 60px;">
+                                    CS Link
+                                </th>
+                                <th style="padding-top: 60px;">
+                                    Survey Link
+                                </th>
+                                <th style="padding-top: 60px;">
+                                    Grand Total
+                                </th>
+                            </tr>  
+                        </thead>
+                        <tbody id="usersLinksList">
+                        
+                    </tbody>
+                    </table>
+                </div>
+
+
+                    <div style="position: relative; display: inline-block; max-width: 500px;">
+                    <div style="background-color: white; display: flex;justify-content: space-between; position: absolute;width: 84%; height: 25px; z-index: 10; top: 12px; left: 30px;">
+                        
+                       <h5>Calculated List</h5>
+                       <span  id="boot-icon" data-bs-toggle="dropdown" onMouseOver="this.style.background='#d5d9d5'" onMouseOut="this.style.background='#FFFF'" style="cursor: pointer;height: auto;padding-top: 3px; border-radius: 40%; text-align: center;"><i class="bi bi-three-dots-vertical"></i></span>
+                       <ul class="dropdown-menu" style="min-width: 170px;">
+                            <li style="background-color: #E5EBE5;"><a class="dropdown-item" id="tableToExcelBtnProductivity" href="#">Download Excel</a></li>
+                          </ul>
+                    </div>
+                    <table id="usersTable2">
+                        <thead style="position: relative; padding-top: 30px;">
+                           
+                            <tr>
+                                <th style="padding-top: 60px;">
+                                    User Name
+                                </th>
+                                <th style="padding-top: 60px;">
+                                    CS Link
+                                </th>
+                                <th style="padding-top: 60px;">
+                                    Survey Link
+                                </th>
+                                <th style="padding-top: 60px;">
+                                    Grand Total
+                                </th>
+                            </tr>  
+                        </thead>
+                        <tbody id="usersProductivityList">
+                        
+                    </tbody>
+                    </table>
+                </div>
                 </div>
             </div>
 
@@ -556,13 +577,14 @@
         <!-- this is dependency required to convert excel data to json -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Dynatable/0.3.1/jquery.dynatable.min.js"></script>
     <script src="./assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
+    <script src="https://cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
 
     <script>
 var userDetails ;
 
        try{
            userDetails = atob(document.cookie.split('.')[1]);
-          userDetails = JSON.parse(userDetails);
+          userDetails = JSON.parse(userDetails)
        }catch{
         swal.fire({
                                 title: "Error",
@@ -574,32 +596,12 @@ var userDetails ;
 
                             })
        }
-        //  ################## for admin dashboard ##########################
-       if(userDetails.username=='102870'){
-                                window.location = "http://localhost/frontend/dist/admin-index.html";
-       }
+         
 
         $('#userName').html(userDetails.firstname);
         $('#userId').html(userDetails.username);
-        // ************************** below code change category acording to client code **********************
+    
 
-        $("#client-code-select").change(function () {
-          console.log('dfhf')
-            if ($(this).val() == 'Survey') {
-                $(".csOptions").css("display", "none");
-                $(".eblastOptions").css("display", "none");
-                $(".surveyOptions").css("display", "inline-block");
-            } else if ($(this).val() == 'CS') {
-                $(".csOptions").css("display", "inline-block");
-                $(".surveyOptions").css("display", "none");
-                $(".eblastOptions").css("display", "none");
-            } else {
-                $(".csOptions").css("display", "none");
-                $(".surveyOptions").css("display", "none");
-                $(".eblastOptions").css("display", "inline-block");
-
-            }
-        });
 //**************************************************
 $('.searchBoxOuter').focusin(function(){
     $(this).css('background','#f2f7ff');
@@ -666,19 +668,20 @@ $('.searchBoxOuter').focusout(function(){
             }
 
             $.ajax({
-                      type: "POST",
-                      url: "http://localhost:1010/camp-id/specific-data",
-                      data: JSON.stringify(userdata),
+                      type: "GET",
+                      url: "http://localhost:1010/camp-id-admin/specific-data-admin",
+                      data: '',
                       dataType: "json",
                       contentType: "application/json; charset=utf-8",
                       encode: true,
                     }).done(function (data) {
-                      $('#campTotal').html(data.length);
+                        
+                      $('#campTotal').html( Object.values(data[0]));
                     })
             $.ajax({
-                      type: "POST",
-                      url: "http://localhost:1010/Get-All-Links/get-link",
-                      data: JSON.stringify(userdata),
+                      type: "GET",
+                      url: "http://localhost:1010/Get-All-Links-admin/get-link-admin",
+                      data: '',
                       dataType: "json",
                       contentType: "application/json; charset=utf-8",
                       encode: true,
@@ -687,95 +690,13 @@ $('.searchBoxOuter').focusout(function(){
                      $('#overallLinksTotal').html(data.totalLinks);
                     });
     
-        // ***************************below code id to get filter total links**********************
-        $('#totalLinkForm').submit(function (e) {  
-
-          e.preventDefault();
-            let totalLinkData={
-                client_code: $('#client-code-select').val(),
-                category:$('#category-select').val(),
-                country:$('#country-select').val(),
-                userid: userDetails.username
-            }
-
-            $.ajax({
-                      type: "POST",
-                      url: "http://localhost:1010/filter-data/filter-data",
-                      data: JSON.stringify(totalLinkData),
-                      dataType: "json",
-                      contentType: "application/json; charset=utf-8",
-                      encode: true,
-                    }).done(function (data) {
-                    $('#filterLinksDiv').css('display', 'block');
-                    $('#filterLinksTotal').html(data.total);
-                    });
-        });
-       
+        
+                    
                 
     </script>
     <script>
-        // below code for chart*************************************************
-const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-let tempDate = new Date();
-        $('#chartHead').html(`Monthly Links Chart ( ${month[tempDate.getMonth()]} ${tempDate.getFullYear()} )`);
       
-        let chartLinkTotal=[];
-
-          for (let i = 0; i < 31; i++) {
-            chartLinkTotal.push(0);
-          }
-        $.ajax({
-                      type: "POST",
-                      url: "http://localhost:1010/search-chart/searchbychart",
-                      data: JSON.stringify(userdata),
-                      dataType: "json",
-                      contentType: "application/json; charset=utf-8",
-                      encode: true,
-                    }).done(function (data) {
-                    data.forEach(element => {
-                       
-                      chartLinkTotal[new Date(element.Date).getDate()-2] += (element.EDM_link.split("$").length )
-                    });
-
-                     var area = new ApexCharts(document.querySelector("#area"), areaOptions);
-        area.render();
-                    });
-
-        var areaOptions = {
-   series: [
-     {
-       name: "Links",
-       data: chartLinkTotal,
-     }
-   ],
-   chart: {
-     height: 350,
-     type: "area",
-   },
-   dataLabels: {
-     enabled: false,
-   },
-   stroke: {
-     curve: "smooth",
-   },
-   xaxis: {
-     type: "number",
-     categories:  function () {
-      let daysArray=[];
-      var daysInCurrentMonth=new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).getDate();
-      for (let i = 1; i <= daysInCurrentMonth; i++) {
-        daysArray.push(i);
-      }
-      return daysArray;
-                 }(),
-   },
-//    tooltip: {
-//      x: {
-//        format: "dd/MM/yyyy",
-//      },
-//    },
- };
-
+      
        
     </script>
 
@@ -919,6 +840,107 @@ $(document).ready(function(){
               });
             });
 
+            // ************************************ users table *************************************
+            let fromToDate;
+            $('#fromDate').change(function (e) { 
+                e.preventDefault();
+                fromToDate={
+                fromdate:$('#fromDate').val(),
+                todate:$('#toDate').val()
+            }
+            });
+
+            $('#toDate').change(function (e) { 
+                e.preventDefault();
+                 fromToDate={
+                fromdate:$('#fromDate').val(),
+                todate:$('#toDate').val()
+            }
+            });
+
+            
+            // to fetch users list
+           
+            let usersList={};
+     
+            $.ajax({
+                      type: "GET",
+                      url: "http://localhost:1010/user/data",
+                      data: '',
+                      dataType: "json",
+                      contentType: "application/json; charset=utf-8",
+                      encode: true,
+                    }).done(function (data) {
+                       
+                        data.forEach(element => {
+                usersList[element.firstname] = {
+                    'CS':0,
+                    'Survey':0,
+                    'total':0
+                };
+            });
+            for (var ele in usersList) {
+                $('#usersLinksList').append(`<tr style="text-align:center;"><td>${ele}</td><td>${usersList[ele].CS}</td><td>${usersList[ele].Survey}</td><td>${usersList[ele].total=(usersList[ele].CS+usersList[ele].Survey)}</td></tr>`);
+                }
+                for (var ele in usersList) {
+                $('#usersProductivityList').append(`<tr style="text-align:center;"><td>${ele}</td><td>${usersList[ele].CS}</td><td>${usersList[ele].Survey}</td><td>${usersList[ele].total=(usersList[ele].CS+usersList[ele].Survey)}</td></tr>`);
+                }
+        });
+
+          
+           $('#dateBtn').click(function (e) { 
+            for (var ele in usersList) {
+              usersList[ele].CS=0;
+              usersList[ele].Survey=0;
+              usersList[ele].total=0;
+                }
+            $.ajax({
+                      type: "POST",
+                      url: "http://localhost:1010/monthly/data",
+                      data: JSON.stringify(fromToDate),
+                      dataType: "json",
+                      contentType: "application/json; charset=utf-8",
+                      encode: true,
+                    }).done(function (data) {
+                     console.log(data);
+                        data.forEach(element => {
+                            if(element.Client_Code=='CS'){
+                                usersList[element.EDM_Completed_By].CS += (element.EDM_link.split("$").length );
+                            }else if(element.Client_Code=='Survey'){
+                                usersList[element.EDM_Completed_By].Survey += (element.EDM_link.split("$").length );
+                            }
+                        });
+                        let tempstr='';
+                        let tempstrProductivity='';
+                        for (var ele in usersList) {
+                tempstr+=`<tr style="text-align:center;"><td>${ele}</td><td>${usersList[ele].CS}</td><td>${usersList[ele].Survey}</td><td>${usersList[ele].total=(usersList[ele].CS+usersList[ele].Survey)}</td></tr>`;
+                tempstrProductivity+=`<tr style="text-align:center;"><td>${ele}</td><td>${usersList[ele].CS}</td><td>${usersList[ele].Survey=usersList[ele].Survey*20}</td><td>${usersList[ele].total=(usersList[ele].CS+usersList[ele].Survey)}</td></tr>`;
+            }
+                $('#usersLinksList').html(tempstr);
+                $('#usersProductivityList').html(tempstrProductivity);
+                    });
+           });
+        
+        //    ########################### convert table to excel ######################################
+        $('#tableToExcelBtn').click(function (e) { 
+            $('#usersTable1').table2excel({
+		exclude: ".no-export",
+		filename: `Report-${fromToDate.fromdate}-to-${fromToDate.todate}.xls`,
+		fileext: ".xls",
+		exclude_links: true,
+		exclude_inputs: true
+	});
+        });
+
+        $('#tableToExcelBtnProductivity').click(function (e) { 
+            $('#usersTable2').table2excel({
+		exclude: ".no-export",
+		filename: `Report-pro-cal-${fromToDate.fromdate}-to-${fromToDate.todate}.xls`,
+		fileext: ".xls",
+		exclude_links: true,
+		exclude_inputs: true
+	});
+        });
             // logout functionality **************************************
 
             function logout(){
