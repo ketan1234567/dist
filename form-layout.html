@@ -86,6 +86,7 @@
                                                             <label for="campaign-name-column">Campaign Name</label>
                                                             <input type="text" id="campaign-name-column" class="form-control"
                                                                 placeholder="Campaign Name" name="fname-column" required>
+                                                                <p id="campaignErr" style="color: red; display: none;">Campaign already exist</p>
                                                         </div>
                                                     </div>
 
@@ -213,7 +214,7 @@
                                                   <!-- ******************************* -->
 
                                                 <div class="col-12 d-flex justify-content-end">
-                                                    <button type="submit"
+                                                    <button id="submitBtn" type="submit"
                                                         class="btn btn-primary me-1 mb-1">Submit</button>
                                                     <button type="reset"
                                                         class="btn btn-light-secondary me-1 mb-1" id="resetBtn">Reset</button>
@@ -245,10 +246,21 @@
     <script src="./assets/js/extensions/sweetalert2.js"></script>
     <script src="./assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
   <script>
+var userDetails;
+         try{
+           userDetails = atob(document.cookie.split('.')[1]);
+          userDetails = JSON.parse(userDetails)
+       }catch{
+        swal.fire({
+                                title: "Error",
+                                text: "Please Login",
+                                icon: "error",
+                                confirmButtonText: "Ok"
+                            }).then(()=>{
+                              window.location = "http://localhost/frontend/dist/auth-login.html";
 
-  let userDetails = atob(document.cookie.split('.')[1]);
-         userDetails = JSON.parse(userDetails);
-    
+                            })
+       }
     // ************************** below code change category acording to client code **********************
     
     $("#client-code-select").change(function(){
@@ -276,205 +288,74 @@ $("#resetBtn").click(function(){
 
 
 // ********************* below code to convert table to JSON ****************
-var assetLinkJson;
-$(document).ready(function() {
-                var customCellWriter = function(column, record) {
-                  var html = column.attributeWriter(record),
-                    td = '<td';
-                  if (column.hidden || column.textAlign) {
-                    td += ' style="';
-                    if (column.hidden) {
-                      td += 'display: none;';
-                    }
-                    if (column.textAlign) {
-                      td += 'text-align: ' + column.textAlign + ';';
-                    }
-                    td += '"';
-                  }
-                  return td + '><div>' + html + '<\/td>';
-                };
-                // var makeElementEditable = function(element) {
-                //   $('div', element).attr('contenteditable', true);
-                //   $(element).focusout(function() {
-                //     $('div', element).attr('contenteditable', false);
-                //   });
-                //   $(element).keydown(function(e) {
-                //     if (e.which == 13) {
-                //       e.preventDefault();
-                //       $('div', element).attr('contenteditable', false);
-                //       $(document).focus();
-                //     }
-                //   });
-                //   $('div', element).on('paste', function(e) {
-                //     e.preventDefault();
-                //   });
-                // };
-                // $(document).on('keypress', 'textarea#jsonDataDump', function(e) {
-                //   e.preventDefault();
-                //   e.stopPropagation();
-                // });
-                // $(document).on('keypress', 'textarea#asset-link-data', function(e) {
-                //   if (e.ctrlKey !== true && e.key != 'v') {
-                //     e.preventDefault();
-                //     e.stopPropagation();
-                //   }
-                // });
-                $(document).on('paste', 'textarea#asset-link-data', function(e) {
-                //   e.preventDefault();
-                  var cb;
-                  var clipText = '';
-                  if (window.clipboardData && window.clipboardData.getData) {
-                    cb = window.clipboardData;
-                    clipText = cb.getData('Text');
-                  } else if (e.clipboardData && e.clipboardData.getData) {
-                    cb = e.clipboardData;
-                    clipText = cb.getData('text/plain');
-                  } else {
-                    cb = e.originalEvent.clipboardData;
-                    clipText = cb.getData('text/plain');
-                  }
-                  var clipRows = clipText.split('\n');
-                  for (i = 0; i < clipRows.length; i++) {
-                    clipRows[i] = clipRows[i].split('\t');
-                  }
-                  var jsonObj = [];
-                  for (i = 0; i < clipRows.length - 1; i++) {
-                    var item = {};
-                    for (j = 0; j < clipRows[i].length; j++) {
-                      if (clipRows[i][j] != '\r') {
-                        if (clipRows[i][j].length !== 0) {
-                          item[j] = clipRows[i][j];
+let assetLinkJson;
+$(document).ready(function(){
+            $("#asset-link-data").on("input",function(e){
+                var inputValue=$(e.target).val();
+                inputValue=inputValue.replace(/\"(\n*(.+)\n*)\"/g,"$2");
+                // inputValue=inputValue.replace(/\n+\"/g,"");
+                 inputValue=inputValue.replaceAll("\"","");
+                 inputValue=inputValue.replace(/"*(.*\n*)"*\t(.*)\n/g,`{"title": "$1","link": "$2"},`) 
+                 inputValue=inputValue.replaceAll("\n","");
+                inputValue=inputValue.slice(0, -1);//remove last comma
+                inputValue=inputValue.replace(/\"\s+/g,`"`) //remove starting spaces
+                inputValue=inputValue.replace(/\s+\"/g,`"`) //remove ending spaces
+                inputValue="["+inputValue+ "]"
+                console.log(inputValue);
+                 assetLinkJson=JSON.parse(inputValue);
+                console.log(assetLinkJson);
+                console.log(assetLinkJson.length);
+
+            });
+        });
+              
+// *************************** Check if campaign exist *************************************   
+                        $('#campaign-name-column').on('input', function(e) {
+                            e.preventDefault();
+                            let cnameAddDash = $("#campaign-name-column").val();
+                      cnameAddDash = cnameAddDash.replaceAll(' ', '-');
+                      let tempr=true;
+                      while(tempr){
+                        console.log(cnameAddDash)
+                        if (cnameAddDash.includes('--')) {
+                            cnameAddDash = cnameAddDash.replaceAll('--', '-'); 
+                        }
+                        else{
+                            tempr=false;
                         }
                       }
-                    }
-                    jsonObj.push(item);
-                  }
-                  $('textarea#jsonDataDump').val('');
-                  var tablePlaceHolder = document.getElementById('output');
-                  tablePlaceHolder.innerHTML = '';
-                  var table = document.createElement('table');
-                  table.id = 'excelDataTable';
-                  table.className = 'table';
-                  var header = table.createTHead();
-                  var row = header.insertRow(0);
-                  var keys = [];
-                  for (var i = 0; i < jsonObj.length; i++) {
-                    var obj = jsonObj[i];
-                    for (var j in obj) {
-                      if ($.inArray(j, keys) == -1) {
-                        keys.push(j);
+                      $('#campaign-name-column').val(cnameAddDash);
+
+                      $.ajax({
+                      type: "POST",
+                      url: "http://localhost:1010/check/check-camp",
+                      data: JSON.stringify({Campaign_Name:cnameAddDash}),
+                      dataType: "json",
+                      contentType: "application/json; charset=utf-8",
+                      encode: true,
+                    }).done(function (data) {
+                      console.log(data.length);
+                      if(data.length==0){
+                        
+                        $('#campaign-name-column').css('border', '1px solid green');
+                        $('#campaignErr').css('display', 'none');
+                        $('#submitBtn').removeAttr('disabled');
+                      }else{
+                        $('#campaign-name-column').css('border', '1px solid red');
+                        $('#campaignErr').css('display', 'block');
+                        $('#submitBtn').attr('disabled', 'disabled');
+                     
                       }
-                    }
-                  }
-                  keys.forEach(function(value, index) {
-                    var headerCell = document.createElement('th');
-                    headerCell.innerHTML = '<div>' + value + '<\/div>';
-                    $(headerCell).click(function() {
-                      makeElementEditable(this);
-                    });
-                    $(headerCell).keyup(function(e) {
-                      var ignoredClass = 'ignored';
-                      var ignoredAttr = 'data-attr-ignore';
-                      var columnCells = $('td, th', table).filter(':nth-child(' + ($(this).index() + 1) + ')');
-                      $(this).removeAttr(ignoredAttr);
-                      $(columnCells).each(function() {
-                        $(this).removeClass(ignoredClass);
-                        $(this).removeAttr(ignoredAttr);
-                      });
-                      if ($(this).is(':empty') || $(this).text().trim() === '') {
-                        $(this).attr(ignoredAttr, '');
-                        $(columnCells).each(function() {
-                          $(this).addClass(ignoredClass);
-                          $(this).attr(ignoredAttr, '');
+                    
                         });
-                      }
                     });
-                    var cell = row.insertCell(index);
-                    cell.parentNode.insertBefore(headerCell, cell);
-                    cell.parentNode.removeChild(cell);
-                  });
-                  tablePlaceHolder.appendChild(table);
-                  var excelDynaTable = $('table#excelDataTable').dynatable({
-                    features: {
-                      paginate: false,
-                      search: false,
-                      recordCount: true,
-                      sort: false
-                    },
-                    dataset: {
-                      records: jsonObj
-                    },
-                    writers: {
-                      _cellWriter: customCellWriter
-                    }
-                  });
-
-                  // below code convert table to json automatically after pasting*******************************
-                  var $rows = $('table#excelDataTable').find('tr:not(:hidden)');
-                  var headers = [];
-                  var data = [];
-                  $($rows.shift()).find('th:not(:empty):not([data-attr-ignore])').each(function() {
-                    console.log('[' + $(this).text().toLowerCase() + ']');
-                    headers.push($(this).text().toLowerCase());
-                  });
-                  $rows.each(function() {
-                    var $td = $(this).find('td:not([data-attr-ignore])');
-                    var h = {};
-                    headers.forEach(function(header, i) {
-                      h[header] = $td.eq(i).text();
-                    });
-                    data.push(h);
-                  });
-                  var jsonString = JSON.stringify(data, null, 2);
-                  $('textarea#jsonDataDump').val(jsonString);
-                   console.log(jsonString);
-                 assetLinkJson=data;
-                  assetLinkJson.forEach(element => {
-                      delete Object.assign(element, {['title']: element['0'] })['0'];
-                      delete Object.assign(element, {['link']: element['1'] })['1'];
-                    });
-                  // ***************************************************************
-
-                  $(document).on('click', 'table#excelDataTable td', function() {
-                    makeElementEditable(this);
-                  });
-                });
-                jQuery.fn.pop = [].pop;
-                jQuery.fn.shift = [].shift;
-
-                  // below code convert table to json manually using button click  *******************************
-
-                // $(document).on('click', 'button#exportJsonData', function() {
-                //   var $rows = $('table#excelDataTable').find('tr:not(:hidden)');
-                //   var headers = [];
-                //   var data = [];
-                //   $($rows.shift()).find('th:not(:empty):not([data-attr-ignore])').each(function() {
-                //     console.log('[' + $(this).text().toLowerCase() + ']');
-                //     headers.push($(this).text().toLowerCase());
-                //   });
-                //   $rows.each(function() {
-                //     var $td = $(this).find('td:not([data-attr-ignore])');
-                //     var h = {};
-                //     headers.forEach(function(header, i) {
-                //       h[header] = $td.eq(i).text();
-                //     });
-                //     data.push(h);
-                //   });
-                //   var jsonString = JSON.stringify(data, null, 2);
-                //   $('textarea#jsonDataDump').val(jsonString);
-                //   console.log(jsonString);
-                // });
-              });
-
-              
               // *************************** After Submit function *************************************
                   $(document).ready(function () {
                   $("form").submit(function (event) {
-                      let cnameAddDash = $("#campaign-name-column").val();
-                      cnameAddDash = cnameAddDash.replaceAll(' ', '-');
-                      console.log()
+                    event.preventDefault();
+                      
                     var formData = {
-                      cname: cnameAddDash,
+                      cname: $("#campaign-name-column").val(),
                       cid: $("#campaign-id-column").val(),
                       category: $("#category-select").val(),
                       client_code: $("#client-code-select").val(),
@@ -498,12 +379,11 @@ $(document).ready(function() {
                       $("#resetBtn").click();
                       swal.fire({
                                 title: "Data Added Successfully",
-                                text: data,
+                               
                                 icon: "success",
                                 confirmButtonText: "Ok",
                             })
                     });
-                    event.preventDefault();
                   });
                 });
        // ***********************************************************************

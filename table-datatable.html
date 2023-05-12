@@ -58,7 +58,7 @@
 }
       #myTab{
         position: relative;
-        right: 10px;
+        right: 30px;
         float: right;
         cursor: pointer;
       }
@@ -109,7 +109,9 @@
   right: 5px;
   transform: rotate(45deg);
 }
-
+#table1_wrapper>.row:nth-child(1){
+    width: 55%;
+}
 
     </style>
 </head>
@@ -332,6 +334,24 @@
                     <div class="card">
 
                         <div class="card-body">
+                            <div style="background-color: white; display: flex;justify-content: space-between;align-items: end; position: absolute;width: 40%;  top: 24px; right: 10px;">
+                        <div>
+                         <p style="margin-bottom: 0px;">From :</p>
+                                <input style="color: #607080; border: 1px solid #dce7f1;border-radius: 0.2rem;padding: 0.20rem 0.5rem;" type="date" name="" id="fromDate">
+                               
+                        </div>
+                               
+                        <div>
+                                <p  style="margin-bottom: 0px;">To :</p>
+                                <input style="color: #607080;border: 1px solid #dce7f1;border-radius: 0.2rem;padding: 0.20rem 0.5rem;" type="date" name="" id="toDate">
+                            </div>
+                                <button class="btn btn-success" id="dateBtn" style="padding: 3px 5px 5px 5px; height: 26px; width: 30px; margin-bottom: 3px;" > <i class="bi bi-search"></i> </button>
+                               
+                                    <!-- <span  id="boot-icon" data-bs-toggle="dropdown" onMouseOver="this.style.background='#d5d9d5'" onMouseOut="this.style.background='#FFFF'" style="cursor: pointer;height: auto;padding-top: 3px; border-radius: 40%; text-align: center;"><i class="bi bi-three-dots-vertical"></i></span>
+                                  <ul class="dropdown-menu" style="min-width: 170px;">
+                                    <li style="background-color: #E5EBE5;"><a class="dropdown-item" id="tableToExcelBtn" href="#">Download Excel</a></li>
+                                  </ul> -->
+                            </div>
                             <table class="table table-striped" id="table1">
                                  <thead>
                                     <tr>
@@ -342,7 +362,6 @@
                                         <th>Category</th>
                                         <th>Made by</th>
                                         <th>Date</th>
-                                        <th>Status</th>
                                     </tr>
                                 </thead>
                         
@@ -372,6 +391,24 @@
     
         <script>
     
+    var userDetails ;
+
+       try{
+           userDetails = atob(document.cookie.split('.')[1]);
+          userDetails = JSON.parse(userDetails)
+        
+       }catch{
+        swal.fire({
+                                title: "Error",
+                                text: "Please Login",
+                                icon: "error",
+                                confirmButtonText: "Ok"
+                            }).then(()=>{
+                              window.location = "http://localhost/frontend/dist/auth-login.html";
+
+                            })
+       }
+    //    *****************************************************************************
              $('#table1').on('mouseover', 'tbody tr', function () {
                 $(this).css({"outline": "1px solid grey", "cursor": "pointer"})
             }).on('mouseout', 'tbody tr', function () {
@@ -407,25 +444,69 @@
                { data: 'Client_Code' },
                { data: 'Category' },
                { data: 'EDM_Completed_By' },
-               { data: 'Date' },
-               { data: 'status' }
+               { data: 'Date',
+               "render": function(data, type, row, meta){
+            
+            return data.slice(0, data.indexOf('T'));
+         } },
              ]
            })
-        }).catch(err => {swal.fire({
-                                title: "Error",
-                                text: "Please Login",
-                                icon: "error",
-                                confirmButtonText: "Ok"
-                            }).then(function (err) {
+        })
+        // .catch(err => {swal.fire({
+        //                         title: "Error",
+        //                         text: "Please Login",
+        //                         icon: "error",
+        //                         confirmButtonText: "Ok"
+        //                     }).then(function (err) {
                                
-                                  window.location = "http://localhost/frontend/dist/auth-login.html";
+        //                           window.location = "http://localhost/frontend/dist/auth-login.html";
                                 
-                            })
-                          }
+        //                     })
+        //                   }
         
         
         
-        );
+        // );
+        // #################################### filter by date ########################
+      
+
+    
+
+           $('#dateBtn').click(function (e) { 
+           
+        let fromToDate;
+     
+     $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+        
+ var min =new Date(fromToDate.fromdate);
+ var max = new Date(fromToDate.todate);
+ console.log(min);
+ var date = new Date(data[6]) || 0; // use data for the date column
+ console.log(date);
+ if (
+     (isNaN(min) && isNaN(max)) ||
+     (isNaN(min) && date <= max) ||
+     (min <= date && isNaN(max)) ||
+     (min <= date && date <= max)
+ ) {
+     return true;
+ }
+
+ return false;
+});
+
+            var table = $('#table1').DataTable();
+ 
+            fromToDate={
+                fromdate:$('#fromDate').val(),
+                todate:$('#toDate').val()
+            }
+            table.draw();
+
+           });
+             
+           
+           
 
 // #########################################################################
 $('#cancelBtn').click(function(){
@@ -436,10 +517,10 @@ $('#cancelBtn').click(function(){
         var row;
         $('#table1').on('click', 'tbody tr', function () {
                  row = table.row(this).data();
-                
+                console.log(row)
             $('.popupOuter').css({'display':'flex'})
 
-            $("#updatedBy").html(row.Links_Updated_by);
+             $("#updatedBy").html(row.Links_Updated_by);
             $("#campaign-name-column").val(row.Campaign_Name);
             $("#campaign-id-column").val(row.CID);
             $("#client-code-select").val(row.Client_Code);
@@ -460,7 +541,8 @@ $('#cancelBtn').click(function(){
               'link':linkRow[i]
           });
            }
-            table = $('#asset-link-table').DataTable({
+          let  table1 = $('#asset-link-table').DataTable({
+            destroy: true,
           data:finalList,
           columns: [
                { data: 'asset-name' },
@@ -480,234 +562,35 @@ $('#cancelBtn').click(function(){
 // ***********************************************************************************
 
 // ********************* below code to convert table to JSON ****************
-var assetLinkJson;
-$(document).ready(function() {
-                var customCellWriter = function(column, record) {
-                  var html = column.attributeWriter(record),
-                    td = '<td';
-                  if (column.hidden || column.textAlign) {
-                    td += ' style="';
-                    if (column.hidden) {
-                      td += 'display: none;';
-                    }
-                    if (column.textAlign) {
-                      td += 'text-align: ' + column.textAlign + ';';
-                    }
-                    td += '"';
-                  }
-                  return td + '><div>' + html + '<\/td>';
-                };
-                var makeElementEditable = function(element) {
-                  $('div', element).attr('contenteditable', true);
-                  $(element).focusout(function() {
-                    $('div', element).attr('contenteditable', false);
-                  });
-                  $(element).keydown(function(e) {
-                    if (e.which == 13) {
-                      e.preventDefault();
-                      $('div', element).attr('contenteditable', false);
-                      $(document).focus();
-                    }
-                  });
-                  $('div', element).on('paste', function(e) {
-                    e.preventDefault();
-                  });
-                };
-                // $(document).on('keypress', 'textarea#jsonDataDump', function(e) {
-                //   e.preventDefault();
-                //   e.stopPropagation();
-                // });
-                // $(document).on('keypress', 'textarea#asset-link-data', function(e) {
-                //   if (e.ctrlKey !== true && e.key != 'v') {
-                //     e.preventDefault();
-                //     e.stopPropagation();
-                //   }
-                // });
-                $(document).on('paste', 'textarea#asset-link-data', function(e) {
-                //   e.preventDefault();
-                  var cb;
-                  var clipText = '';
-                  if (window.clipboardData && window.clipboardData.getData) {
-                    cb = window.clipboardData;
-                    clipText = cb.getData('Text');
-                  } else if (e.clipboardData && e.clipboardData.getData) {
-                    cb = e.clipboardData;
-                    clipText = cb.getData('text/plain');
-                  } else {
-                    cb = e.originalEvent.clipboardData;
-                    clipText = cb.getData('text/plain');
-                  }
-                  var clipRows = clipText.split('\n');
-                  for (i = 0; i < clipRows.length; i++) {
-                    clipRows[i] = clipRows[i].split('\t');
-                  }
-                  var jsonObj = [];
-                  for (i = 0; i < clipRows.length - 1; i++) {
-                    var item = {};
-                    for (j = 0; j < clipRows[i].length; j++) {
-                      if (clipRows[i][j] != '\r') {
-                        if (clipRows[i][j].length !== 0) {
-                          item[j] = clipRows[i][j];
-                        }
-                      }
-                    }
-                    jsonObj.push(item);
-                  }
-                  $('textarea#jsonDataDump').val('');
-                  var tablePlaceHolder = document.getElementById('output');
-                  tablePlaceHolder.innerHTML = '';
-                  var table = document.createElement('table');
-                  table.id = 'excelDataTable';
-                  table.className = 'table';
-                  var header = table.createTHead();
-                  var row = header.insertRow(0);
-                  var keys = [];
-                  for (var i = 0; i < jsonObj.length; i++) {
-                    var obj = jsonObj[i];
-                    for (var j in obj) {
-                      if ($.inArray(j, keys) == -1) {
-                        keys.push(j);
-                      }
-                    }
-                  }
-                  keys.forEach(function(value, index) {
-                    var headerCell = document.createElement('th');
-                    headerCell.innerHTML = '<div>' + value + '<\/div>';
-                    $(headerCell).click(function() {
-                      makeElementEditable(this);
-                    });
-                    $(headerCell).keyup(function(e) {
-                      var ignoredClass = 'ignored';
-                      var ignoredAttr = 'data-attr-ignore';
-                      var columnCells = $('td, th', table).filter(':nth-child(' + ($(this).index() + 1) + ')');
-                      $(this).removeAttr(ignoredAttr);
-                      $(columnCells).each(function() {
-                        $(this).removeClass(ignoredClass);
-                        $(this).removeAttr(ignoredAttr);
-                      });
-                      if ($(this).is(':empty') || $(this).text().trim() === '') {
-                        $(this).attr(ignoredAttr, '');
-                        $(columnCells).each(function() {
-                          $(this).addClass(ignoredClass);
-                          $(this).attr(ignoredAttr, '');
-                        });
-                      }
-                    });
-                    var cell = row.insertCell(index);
-                    cell.parentNode.insertBefore(headerCell, cell);
-                    cell.parentNode.removeChild(cell);
-                  });
-                  tablePlaceHolder.appendChild(table);
-                  var excelDynaTable = $('table#excelDataTable').dynatable({
-                    features: {
-                      paginate: false,
-                      search: false,
-                      recordCount: true,
-                      sort: false
-                    },
-                    dataset: {
-                      records: jsonObj
-                    },
-                    writers: {
-                      _cellWriter: customCellWriter
-                    }
-                  });
+let assetLinkJson;
+$(document).ready(function(){
+            $("#asset-link-data").on("input",function(e){
+                var inputValue=$(e.target).val();
+                inputValue=inputValue.replace(/\"(\n*(.+)\n*)\"/g,"$2");
+                // inputValue=inputValue.replace(/\n+\"/g,"");
+                 inputValue=inputValue.replaceAll("\"","");
+                 inputValue=inputValue.replace(/"*(.*\n*)"*\t(.*)\n/g,`{"title": "$1","link": "$2"},`) 
+                 inputValue=inputValue.replaceAll("\n","");
+                inputValue=inputValue.slice(0, -1);//remove last comma
+                inputValue=inputValue.replace(/\"\s+/g,`"`) //remove starting spaces
+                inputValue=inputValue.replace(/\s+\"/g,`"`) //remove ending spaces
+                inputValue="["+inputValue+ "]"
+                console.log(inputValue);
+                 assetLinkJson=JSON.parse(inputValue);
+                console.log(assetLinkJson);
+                console.log(assetLinkJson.length);
 
-                  // below code convert table to json automatically after pasting*******************************
-                  var $rows = $('table#excelDataTable').find('tr:not(:hidden)');
-                  var headers = [];
-                  var data = [];
-                  
-                  $($rows.shift()).find('th:not(:empty):not([data-attr-ignore])').each(function() {
-                    // console.log('[' + $(this).text().toLowerCase() + ']');
-                    headers.push($(this).text().toLowerCase());
-                  });
-                  $rows.each(function() {
-                    var $td = $(this).find('td:not([data-attr-ignore])');
-                    var h = {};
-                    headers.forEach(function(header, i) {
-                      h[header] = $td.eq(i).text();
-                    });
-                    data.push(h);
-                  });
-                  var jsonString = JSON.stringify(data, null, 2);
-                  $('textarea#jsonDataDump').val(jsonString);
-                  // console.log(jsonString);
-                   assetLinkJson=data;
-                  assetLinkJson.forEach(element => {
-                      delete Object.assign(element, {['title']: element['0'] })['0'];
-                      delete Object.assign(element, {['link']: element['1'] })['1'];
-                    });
-                  // ***************************************************************
-
-                  $(document).on('click', 'table#excelDataTable td', function() {
-                    makeElementEditable(this);
-                  });
-                });
-                jQuery.fn.pop = [].pop;
-                jQuery.fn.shift = [].shift;
-
-                  // below code convert table to json manually using button click  *******************************
-
-                // $(document).on('click', 'button#exportJsonData', function() {
-                //   var $rows = $('table#excelDataTable').find('tr:not(:hidden)');
-                //   var headers = [];
-                //   var data = [];
-                //   $($rows.shift()).find('th:not(:empty):not([data-attr-ignore])').each(function() {
-                //     console.log('[' + $(this).text().toLowerCase() + ']');
-                //     headers.push($(this).text().toLowerCase());
-                //   });
-                //   $rows.each(function() {
-                //     var $td = $(this).find('td:not([data-attr-ignore])');
-                //     var h = {};
-                //     headers.forEach(function(header, i) {
-                //       h[header] = $td.eq(i).text();
-                //     });
-                //     data.push(h);
-                //   });
-                //   var jsonString = JSON.stringify(data, null, 2);
-                //   $('textarea#jsonDataDump').val(jsonString);
-                //   console.log(jsonString);
-                // });
-              });
+            });
+        });
     </script>
-    <script>
-   
-   console.log(document.cookie)
-$("#success").click(function () {
-    swal.fire({
-        title: "Error",
-        text: "enter Your",
-        icon: "error",
-        confirmButtonText: "Ok"
-    });
-
-});
-$("#error").click(function () {
-    swal.fire({
-        title: "Error",
-        text: "enter Your",
-        icon: "error",
-        confirmButtonText: "Ok"
-    });
-});
-$("#warning").click(function () {
-    swal.fire({
-        title: "Warning",
-        text: "enter Your",
-        icon: "warning",
-        confirmButtonText: "Ok"
-    });
-});
-
-</script>
+ 
 
 <script>
   // **************************below code is for popup form submission********************
 
   $(document).ready(function () {
               $("#popupForm").submit(function (event) {
-                // event.preventDefault();
+                 event.preventDefault();
               let assetString= row.Asset_Name;
               let linkString = row.EDM_link;
 
@@ -725,12 +608,13 @@ $("#warning").click(function () {
                   asset_data: assetString,
                   link_data: linkString,
                   comment: $("#comment").val(),
+                  updatedby : userDetails.firstname
                 };
                 console.log(formData)
                                                                       
                 $.ajax({
                   type: "POST",
-                  url: "",
+                  url: "http://localhost:1010/update/update-data",
                   data: JSON.stringify(formData),
                   dataType: "json",
                   contentType: "application/json; charset=utf-8",
@@ -740,10 +624,13 @@ $("#warning").click(function () {
                   // $("#cancelBtn").click();
                   swal.fire({
                             title: "Data Added Successfully",
-                            text: data,
                             icon: "success",
                             confirmButtonText: "Ok",
-                        })
+                        }).then(function () {
+                               
+                               window.location = "http://localhost/frontend/dist/table-datatable.html";
+                             
+                         })
                 });
                 
               });
